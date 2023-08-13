@@ -2,9 +2,10 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export const ErrorPage = () => {
+
     const navigator = useNavigate();
     setTimeout(() => {
-        navigator("/Login");
+        navigator("/");
       }, 4000)
   return (
     <div>

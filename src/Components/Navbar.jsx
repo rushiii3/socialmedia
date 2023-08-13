@@ -12,7 +12,7 @@ export const Navbarr = () => {
         "Log Out",
       ];
   return (
-    <div>
+    <div id='Navbar'>
         <Navbar onMenuOpenChange={setIsMenuOpen} isBordered isBlurred={false}>
       <NavbarContent>
         <NavbarMenuToggle

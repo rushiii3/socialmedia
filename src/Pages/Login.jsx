@@ -13,7 +13,7 @@ export const Login = () => {
     }
   }
   return (
-    <div className='h-[91vh] flex items-center bg-slate-200'>
+    <div className='h-[100vh] flex items-center bg-slate-200'>
       <div className='w-[90%]  md:w-[40%] rounded-xl bg-white  mx-auto p-5'>  
         <p className='text-2xl font-bold'>
           Sign Up
