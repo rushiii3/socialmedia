@@ -45,11 +45,13 @@ export const Navbarr = () => {
 
 
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="/login">Login</Link>
+        <NavbarItem>
+          <Button as={Link} href="/login" className='bg-white'>
+            Login
+          </Button>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
+          <Button as={Link} color="primary" href="/login" variant="flat">
             Sign Up
           </Button>
         </NavbarItem>
