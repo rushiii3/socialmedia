@@ -1,9 +1,20 @@
 import { Button , Input,Link } from '@nextui-org/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import {auth,provider} from '../config/firebase'
-import {signInWithPopup,signInWithEmailAndPassword} from 'firebase/auth'
-// import { Link } from 'react-router-dom'
+import {signInWithPopup,signInWithEmailAndPassword , getAuth} from 'firebase/auth'
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from 'react-router-dom';
+
 export const Login = () => {
+  const navigator =  useNavigate();
+  const [user] = useAuthState(auth);
+  
+  useEffect(() => {
+    if(user!==null){
+      navigator("/");
+    }
+  }, [user])
+  
   const SignwithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth,provider);
@@ -29,6 +40,7 @@ export const Login = () => {
         <Link color="foreground"  href="/sign-up">
             Don't have an account? Sign up
           </Link>
+          {auth.currentUser?.displayName}
         </p>
        
 

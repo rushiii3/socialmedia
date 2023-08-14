@@ -1,19 +1,23 @@
 import React from 'react'
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenuItem, NavbarMenu, NavbarMenuToggle} from "@nextui-org/react";
+import { getAuth, signOut } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenuItem, NavbarMenu, NavbarMenuToggle, Avatar} from "@nextui-org/react";
 export const Navbarr = () => {
+  const auth = getAuth();
+  const [user] = useAuthState(auth);
+  
+  const handleLogout =() => {
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      console.log("Loggedout")
+    }).catch((error) => {
+      // An error happened.
+    });
+    }
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-    const menuItems = [
-        "Profile",
-        "Dashboard",
-        "Activity",
-        "Analytics",
-        "System",
-        "Deployments",
-        "Log Out",
-      ];
   return (
     <div id='Navbar'>
-        <Navbar onMenuOpenChange={setIsMenuOpen} isBordered isBlurred={false}>
+        <Navbar onMenuOpenChange={setIsMenuOpen} isBordered isBlurred={false}> 
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -25,27 +29,20 @@ export const Navbarr = () => {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
+
 
 
       <NavbarContent justify="end">
-        <NavbarItem>
+
+       {
+       user !== null ?  (
+        <>
+       <Avatar src={user?.photoURL || "https://img.freepik.com/premium-vector/anime-cartoon-character-vector-illustration_648489-34.jpg"} size="md" />
+        <span className='font-semibold'>{user?.displayName}</span>
+        </>
+       ) : (
+        <>
+    <NavbarItem>
           <Button as={Link} href="/login" className='bg-white'>
             Login
           </Button>
@@ -55,25 +52,29 @@ export const Navbarr = () => {
             Sign Up
           </Button>
         </NavbarItem>
+        </>
+       )}
+      
+
+        {/*  */}
       </NavbarContent>
 
 
       
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
-              }
-              className="w-full"
-              href=""
-              size="lg"
-            >
-              {item}
+      <NavbarItem>
+          <Link  className="w-full cursor-pointer text-black" href="/login" size="lg" >
+              Home
             </Link>
-        </NavbarMenuItem>
-        ))}
+        </NavbarItem>
+      <NavbarItem>
+          <Link color={ "danger" }  className="w-full cursor-pointer" onClick={handleLogout} size="lg" >
+              Log Out
+            </Link>
+        </NavbarItem>
+        
+
+        
       </NavbarMenu>
     </Navbar>
 
