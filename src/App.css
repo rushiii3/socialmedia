@@ -16,3 +16,23 @@
       }
     }
   }
+
+
+  #videoback{
+    z-index: -1;
+    max-width: none;
+float: left;
+top: 0;
+padding: none;
+position: fixed; /* optional depending on what you want to do in your app */
+object-fit: contain;
+
+  }
+
+  #bgBlur{
+    align-items: center;
+  display: flex;
+  justify-content: center;
+    margin-top: 10rem;
+    border-radius: 10px;
+  }

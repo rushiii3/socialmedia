@@ -4,6 +4,7 @@ import { ErrorPage, Login, Main, SignUpPage,About } from './Routes';
 import { Navbarr } from './Components/Header/Navbar';
 import NavbarShow from './Components/Header/NavbarShow';
 import {ToastContainer} from "react-toastify";
+import { Home } from './Pages/Home';
 function App() {
   return (
     <div className="App">
@@ -28,7 +29,7 @@ theme="light"
         <Routes>
           
         <Route path='*' element={<ErrorPage />}/>
-          <Route path='/' element={<Main />}/>
+          <Route path='/' element={<Home />}/>
           <Route path='/Login' element={<Login />}/>
           <Route path='/sign-up' element={<SignUpPage />}/>
           <Route path='/about' element={<About />}/>
