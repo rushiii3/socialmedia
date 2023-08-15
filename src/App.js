@@ -1,10 +1,9 @@
 import './App.css';
 import {BrowserRouter as Router, Routes, Route, Outlet} from 'react-router-dom';
-import { ErrorPage, Login, Main, SignUpPage } from './Routes';
-import { Navbarr } from './Components/Navbar';
-import NavbarShow from './Components/NavbarShow';
+import { ErrorPage, Login, Main, SignUpPage,About } from './Routes';
+import { Navbarr } from './Components/Header/Navbar';
+import NavbarShow from './Components/Header/NavbarShow';
 import {ToastContainer} from "react-toastify";
-
 function App() {
   return (
     <div className="App">
@@ -32,7 +31,9 @@ theme="light"
           <Route path='/' element={<Main />}/>
           <Route path='/Login' element={<Login />}/>
           <Route path='/sign-up' element={<SignUpPage />}/>
+          <Route path='/about' element={<About />}/>
         </Routes>
+       
       </Router>
     </div>
   );

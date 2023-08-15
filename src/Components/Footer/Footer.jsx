@@ -4,7 +4,7 @@ export const Footer = () => {
   return (
     <div className='relative'>
                
-<footer class="bg-white dark:bg-gray-900 h-auto md:h-[100vh] md:fixed right-0">
+<footer class="bg-white dark:bg-gray-900 h-auto md:h-[100vh] lg:fixed right-0">
     <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8  ">
         <div class="flex flex-col">
             <div className='flex'>
@@ -15,7 +15,7 @@ export const Footer = () => {
 
             <ul class="flex flex-row gap-4 text-center justify-evenly	 items-center md:flex-col  my-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
                 <li>
-                    <Link href="/" class="mr-4 hover:underline md:mr-6">About</Link>
+                    <Link href="about" class="mr-4 hover:underline md:mr-6">About</Link>
                 </li>
                 <li>
                     <Link href="/" class="mr-4 hover:underline md:mr-6">Privacy Policy</Link>

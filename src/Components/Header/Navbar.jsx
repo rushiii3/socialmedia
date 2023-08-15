@@ -13,7 +13,7 @@ import {
   NavbarMenuToggle,
   Avatar,
 } from "@nextui-org/react";
-import { MainContent } from "./MainContent";
+import { MainContent } from "../MainContent";
 export const Navbarr = () => {
   const auth = getAuth();
   const [user] = useAuthState(auth);
