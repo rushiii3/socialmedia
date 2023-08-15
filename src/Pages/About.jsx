@@ -20,7 +20,7 @@ export const About = () => {
                     At RushiSync, we believe that every connection has the potential to create a positive impact. Our vision is to provide a seamless and intuitive platform where people from diverse backgrounds can come together, share their stories, and build meaningful relationships that last a lifetime.
                     </p>
                     <p className='text-center mt-2 md:mt-5'>
-                    <video loop autoPlay muted className='rounded-lg h-auto  mx-auto md:h-[500px]'>
+                    <video loop autoPlay muted playsInline className='rounded-lg h-auto  mx-auto md:h-[500px]'>
                             <source src="https://res.cloudinary.com/dmuhioahv/video/upload/v1692081734/vbe4ppvks9wgsa28gp4v.mp4" type="video/ogg"/>
                             Your browser does not support the video tag.
                     </video>

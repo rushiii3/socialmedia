@@ -3,7 +3,7 @@ import React from 'react'
 export const Home = () => {
   return (
     <div className='relative'>
-        <video loop autoPlay muted id="videoback">
+        <video loop autoPlay muted playsInline id="videoback">
                             <source src="https://res.cloudinary.com/dmuhioahv/video/upload/v1692083395/1627385830_bccc6d620406f6cc4bd0dc2000bf8c4a_orig_led7hc.mp4"  type="video/ogg"/>
                             Your browser does not support the video tag.
                     </video>
