@@ -28,7 +28,7 @@ export const MainContent = () => {
     setisLiked(!isLiked);
   };
   return (
-    <div className=" mx-auto">
+    <div className=" mx-auto  p-5">
       <div className="my-5">
         <Card className="max-w-[400px]">
           <CardHeader className="flex gap-3">

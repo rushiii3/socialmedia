@@ -17,7 +17,7 @@ const NavbarShow = ({children}) => {
     }, [Location])
     
   return (
-    <div>{Show && children}</div>
+    <>{Show && children}</>
   )
 }
 
