@@ -990,7 +990,7 @@ export const MainContent = () => {
             </Skeleton>
             <Skeleton isLoaded={isLoaded} className="w-44 rounded-lg">
             <div className="flex items-center">
-              <p className="text-md">Sidharth Malhotra</p>
+              <p className="text-md">Vandana Padhi</p>
               <VscVerifiedFilled size={20} className=" text-sky-500 ml-1" />
             </div>
             </Skeleton>
