@@ -361,7 +361,7 @@ export const MainContent = () => {
             <Skeleton isLoaded={isLoaded} className="w-44 rounded-lg">
             <div className="flex items-center">
               <p className="text-md">Aryan Bagwe </p>
-              {/* <VscVerifiedFilled size={20} className=" text-sky-500 ml-1" /> */}
+              <VscVerifiedFilled size={20} className=" text-sky-500 ml-1" />
             </div>
             </Skeleton>
           </CardHeader>
