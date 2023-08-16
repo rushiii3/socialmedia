@@ -33,6 +33,7 @@ theme="light"
           <Route path='/Login' element={<Login />}/>
           <Route path='/sign-up' element={<SignUpPage />}/>
           <Route path='/about' element={<About />}/>
+          <Route path='/main' element={<Main />}/>
         </Routes>
        
       </Router>
