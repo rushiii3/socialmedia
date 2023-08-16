@@ -982,6 +982,84 @@ export const MainContent = () => {
           </CardFooter>
         </Card>
       </div>
+      <div className="my-5">
+        <Card className="max-w-[400px]">
+          <CardHeader className="flex gap-3">
+          <Skeleton isLoaded={isLoaded} className="rounded-full">
+            <Avatar src={"https://github.com/rushiii3/3d-Web/blob/main/322493247_1627497147701752_8441297061507991597_n.jpeg?raw=true"} size="sm" />
+            </Skeleton>
+            <Skeleton isLoaded={isLoaded} className="w-44 rounded-lg">
+            <div className="flex items-center">
+              <p className="text-md">Sidharth Malhotra</p>
+              <VscVerifiedFilled size={20} className=" text-sky-500 ml-1" />
+            </div>
+            </Skeleton>
+          </CardHeader>
+          <Divider />
+          <CardBody className="p-0">
+          <Skeleton isLoaded={isLoaded}>
+            <Image
+              isZoomed
+              alt="NextUI Fruit Image with Zoom"
+              src="https://github.com/rushiii3/3d-Web/blob/main/314735701_847856479977445_4134909197560907528_n.jpeg?raw=true"
+              className="w-full"
+              radius="none"
+            />
+            </Skeleton>
+          </CardBody>
+          <Divider />
+          <CardFooter className="flex flex-col">
+          <div className="flex justify-start w-full">
+              <div>
+                <Button
+                  isIconOnly
+                  className="text-default-900/60 data-[hover]:bg-foreground/10 -translate-y-2 translate-x-2"
+                  radius="full"
+                  variant="light"
+                  onClick={HandleLike}
+                >
+                  {isLiked ? (
+                    <FaHeart color="red" size={25} />
+                  ) : (
+                    <FaRegHeart size={25} />
+                  )}
+                </Button>
+              </div>
+              <div>
+                <Button
+                  isIconOnly
+                  className="text-default-900/60 data-[hover]:bg-foreground/10 -translate-y-2 translate-x-2"
+                  radius="full"
+                  variant="light"
+                >
+                  <FaRegCommentDots size={25} />
+                </Button>
+              </div>
+
+              <div>
+                <Button
+                  isIconOnly
+                  className="text-default-900/60 data-[hover]:bg-foreground/10 -translate-y-2 translate-x-2"
+                  radius="full"
+                  variant="light"
+                >
+                  <FiShare size={25} />
+                </Button>
+              </div>
+            </div>
+            <div className="flex items-center">
+                <div className="flex">
+                <p className="text-md font-semibold">Hrushi </p>
+              <VscVerifiedFilled size={20} className=" text-sky-500 mx-1" />
+                </div>
+             
+              <p className=" text-justify p-1 line-clamp-1 hover:line-clamp-6">
+              A paragraph is a short collection of well-organized sentences which revolve around a single theme and is coherent. A good paragraph expresses everything it has to say briefly.
+              </p>
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
       
     </div>
   );

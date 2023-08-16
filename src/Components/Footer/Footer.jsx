@@ -4,7 +4,7 @@ export const Footer = () => {
   return (
     <div className='relative'>
                
-<footer class="bg-white dark:bg-gray-900 h-auto md:h-[100vh] md:fixed right-0">
+<footer class="bg-white dark:bg-gray-900 h-auto md:h-[100vh] lg:fixed right-0">
     <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8  ">
         <div class="flex flex-col">
             <div className='flex'>
