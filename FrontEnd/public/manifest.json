@@ -1,0 +1,25 @@
+{
+  "short_name": "RushiSync",
+  "name": "RushiSync App",
+  "icons": [
+    {
+      "src": "https://seeklogo.com/images/S/synccoin-sync-logo-FE0B4336B8-seeklogo.com.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "https://seeklogo.com/images/S/synccoin-sync-logo-FE0B4336B8-seeklogo.com.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://seeklogo.com/images/S/synccoin-sync-logo-FE0B4336B8-seeklogo.com.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
