@@ -1,7 +1,7 @@
-require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
+require("dotenv").config();
 const mongoose = require("mongoose");
 const MongoURl = process.env.MONGO_URL;
 const port = process.env.PORT || 4000;
@@ -16,7 +16,11 @@ app.use(
 
 app.use("/api/v2", productRoute);
 
-app.get("/api", (req, res) => {
+app.use('/t', (req,res) => {
+  res.send("Heyyy");
+})
+
+app.get("/user", (req, res) => {
   res.json([
     {
       user_id: 1,
@@ -167,4 +171,4 @@ mongoose
     console.log(error);
   });
   
-  module.exports = app;
+  // module.exports = app;
