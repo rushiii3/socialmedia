@@ -24,7 +24,7 @@ export const MainContent = () => {
 
   const [PostData, setPostData] = useState([]);
   const getData = async () => {
-    const { data } = await axios.get(`http://localhost:4000/api`);
+    const { data } = await axios.get(`https://socialmedia-1eyo.vercel.app/user`);
     setPostData(data);
   };
   useEffect(() => {
