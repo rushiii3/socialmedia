@@ -11,7 +11,7 @@ const UserRoutes = require('./routes/UserRoutes');
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://192.168.1.101:3000"],
+    origin: ["https://socialmedia-gilt.vercel.app"],
     credentials: true,
   })
 );
