@@ -8,6 +8,9 @@ const NavbarShow = ({children}) => {
       if(Location.pathname==="/Login" || Location.pathname==="/login" || Location.pathname==="/"){
         setShow(false);
       }else if(Location.pathname==="/main" || Location.pathname==="/about"){
+        console.log(Location.pathname);
+        setShow(true);
+      }else if (Location.pathname.includes("/profile/")){
         setShow(true);
       }else{
         setShow(false);

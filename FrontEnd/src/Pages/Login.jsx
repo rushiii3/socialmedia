@@ -1,20 +1,55 @@
 import { Button , Input,Link } from '@nextui-org/react'
-import React, { useEffect } from 'react'
-import {auth,provider} from '../config/firebase'
+import React, { useEffect, useState } from 'react'
+import {provider} from '../config/firebase'
 import {signInWithPopup,signInWithEmailAndPassword , getAuth} from 'firebase/auth'
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from 'react-router-dom';
-
+import { toast } from "react-toastify";
 export const Login = () => {
+  const auth = getAuth();
   const navigator =  useNavigate();
   const [user] = useAuthState(auth);
-  
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
   useEffect(() => {
     if(user!==null){
-      navigator("/");
+      navigator("/main");
     }
   }, [user])
   
+  const handleLogin = () => {
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      console.log(user);
+      toast.success("Login Success!");
+      // ...
+    })
+    .catch((error) => {
+
+      console.log(error.code);
+      if (error.code === "auth/invalid-email") {
+        console.log("Invalid email format.");
+        toast.error("Invalid email format.");
+      } else if (error.code === "auth/user-disabled") {
+        console.log("This user account has been disabled.");
+        toast.error("This user account has been disabled.");
+      } else if (error.code === "auth/wrong-password") {
+        console.log("Incorrect password.");
+        toast.error("Incorrect password.");
+      } else if (error.code === "auth/user-not-found") {
+        console.log("Email Not Found");
+        toast.error("Email Not Found");
+      } else {
+        console.log("An error occurred during authentication.");
+        toast.error("An error occurred during authentication.");
+      }
+    });
+  }
+  
+  
+
   const SignwithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth,provider);
@@ -30,17 +65,16 @@ export const Login = () => {
         <p className='text-2xl font-bold'>
           Login
         </p>
-        <Input type="email" variant="underlined" label="Email" labelPlacement="outside" placeholder="Enter your email" className='text-2xl mt-4' />
-        <Input type="password" variant="underlined" label="Password" labelPlacement="outside" placeholder="Enter your password" className='text-2xl mt-4' />
+        <Input type="email" variant="underlined" value={email} onChange={(e) => {setemail(e.target.value)}} label="Email" labelPlacement="outside" placeholder="Enter your email" className='text-2xl mt-4' />
+        <Input type="password" variant="underlined" value={password} onChange={(e) => {setpassword(e.target.value)}} label="Password" labelPlacement="outside" placeholder="Enter your password" className='text-2xl mt-4' />
         <div>
-        <Button className=' w-1/4 bg-primary-500 text-white my-4'>Login</Button>
+        <Button className=' w-1/4 bg-primary-500 text-white my-4' onClick={handleLogin}>Login</Button>
 
         </div>
         <p className='text-center my-auto'>
         <Link color="foreground"  href="/sign-up">
             Don't have an account? Sign up
           </Link>
-          {auth.currentUser?.displayName}
         </p>
        
 

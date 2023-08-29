@@ -1,6 +1,5 @@
 import React from 'react'
 import { Fade } from "react-awesome-reveal";
-import { Image } from '@nextui-org/react'
 export const About = () => {
   return (
 

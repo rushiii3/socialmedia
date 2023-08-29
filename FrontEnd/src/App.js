@@ -1,6 +1,6 @@
 import './App.css';
 import {BrowserRouter as Router, Routes, Route, Outlet} from 'react-router-dom';
-import { ErrorPage, Login, Main, SignUpPage,About } from './Routes';
+import { ErrorPage, Login, Main, SignUpPage,About, ProfilePage } from './Routes';
 import { Navbarr } from './Components/Header/Navbar';
 import NavbarShow from './Components/Header/NavbarShow';
 import {ToastContainer} from "react-toastify";
@@ -34,6 +34,7 @@ theme="light"
           <Route path='/sign-up' element={<SignUpPage />}/>
           <Route path='/about' element={<About />}/>
           <Route path='/main' element={<Main />}/>
+          <Route path='/profile/:id' element={<ProfilePage />} />
         </Routes>
        
       </Router>

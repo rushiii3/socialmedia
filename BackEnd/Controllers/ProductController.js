@@ -1,26 +1,27 @@
 const Product = require('../Models/ProductModel');
-const getProduct = async(req,res) => {
+const asyncHandler = require('express-async-handler')
+const getProduct = asyncHandler(async(req,res) => {
     try {
       const product = await Product.find({});
       res.status(200).json(product);
     } catch (error) {
-      console.log(error.message);
-      res.status(500).json({message:error.message});
+      res.status(500);
+      throw new Error(error.message);
     }
-  }
+  })
 
-  const getProductById = async(req,res) => {
+  const getProductById = asyncHandler(async(req,res) => {
     try {
       const {id} = req.params;
       const product = await Product.findById(id);
       res.status(200).json(product);
     } catch (error) {
-      console.log(error.message);
-      res.status(500).json({message:error.message});
+      res.status(500);
+      throw new Error(error.message);
     }
-  }
+  })
 
-  const UpdateProductById = async(req,res) => {
+  const UpdateProductById = asyncHandler(async(req,res) => {
     try {
       const {id} = req.params;
       const product = await Product.findByIdAndUpdate(id,req.body);
@@ -30,34 +31,36 @@ const getProduct = async(req,res) => {
       const productUpdate = await Product.findById(id);
       res.status(200).json(productUpdate);
     } catch (error) {
-      console.log(error.message);
-      res.status(500).json({message:error.message});
+      res.status(500);
+      throw new Error(error.message);
     }
-  }
-const DeleteProductById = async(req,res) => {
+  })
+const DeleteProductById = asyncHandler(async(req,res) => {
     try {
       const {id} = req.params;
       const product = await Product.findByIdAndDelete(id);
       if(!product){
-        res.status(404).json({message:"ID not Found !"});
+        res.status(404);
+      throw new Error("ID not Found !");
+        
       }else{
         res.status(200).json({message:"Deleted successfully"});
       }
     } catch (error) {
-      console.log(error.message);
-      res.status(500).json({message:error.message});
+      res.status(500);
+      throw new Error(error.message);
     }
-  }
+  })
 
-  const CreateProduct = async(req,res) => {
+  const CreateProduct = asyncHandler(async(req,res) => {
     try {
       const product = await Product.create(req.body);
       res.status(200).json(product);
     } catch (error) {
-      console.log(error.message);
-      res.status(500).json({message:error.message});
+      res.status(500);
+      throw new Error(error.message);
     }
-  }
+  })
 
   module.exports = {
     getProduct,

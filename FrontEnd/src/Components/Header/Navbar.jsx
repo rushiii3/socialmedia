@@ -8,12 +8,10 @@ import {
   NavbarItem,
   Link,
   Button,
-  NavbarMenuItem,
   NavbarMenu,
   NavbarMenuToggle,
   Avatar,
 } from "@nextui-org/react";
-import { MainContent } from "../MainContent";
 export const Navbarr = () => {
   const auth = getAuth();
   const [user] = useAuthState(auth);
@@ -55,7 +53,7 @@ export const Navbarr = () => {
               }
               size="md"
             />
-            <span className="font-semibold">{user?.displayName}</span>
+            <span className="font-semibold">{user?.displayName === "" ? user?.displayName : "RandomUser"}</span>
           </>
         ) : (
           <>
