@@ -1,0 +1,1 @@
+export const server = "https://socialmedia-1eyo.vercel.app/api/v2";

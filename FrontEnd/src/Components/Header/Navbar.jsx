@@ -1,6 +1,7 @@
 import React from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
+
 import {
   Navbar,
   NavbarBrand,
@@ -10,9 +11,11 @@ import {
   Button,
   NavbarMenu,
   NavbarMenuToggle,
-  Avatar,
+
 } from "@nextui-org/react";
+import { Search } from "./Search";
 export const Navbarr = () => {
+  
   const auth = getAuth();
   const [user] = useAuthState(auth);
   const handleLogout = () => {
@@ -46,6 +49,8 @@ export const Navbarr = () => {
       <NavbarContent justify="end">
         {user !== null ? (
           <>
+            <p>hello</p>
+            {/*
             <Avatar
               src={
                 user?.photoURL ||
@@ -54,9 +59,11 @@ export const Navbarr = () => {
               size="md"
             />
             <span className="font-semibold">{user?.displayName === "" ? user?.displayName : "RandomUser"}</span>
+            */}
           </>
         ) : (
           <>
+            <Search />
             <NavbarItem>
               <Button as={Link} href="/login" className="bg-white">
                 Login

@@ -78,7 +78,7 @@ const data = [
       user_id: 8,
       user_name: "Nora Fatehi",
       user_avatar:
-        "https://imgeng.jagran.com/webstories/56716/5-embellished-sarees-from-nora-fatehi---s-closet-for-every-bride-1691043067.jpeg",
+        "https://images.indianexpress.com/2023/08/nora-fatehi.png",
       user_profile:
         "https://static.toiimg.com/thumb/imgsize-23456,msid-102144554,width-600,resizemode-4/102144554.jpg",
       user_verified: false,
@@ -154,6 +154,7 @@ router.get("/user/:id", (req, res) => {
     res.send(usrv);
   });
 
+  
   
 
   module.exports = router

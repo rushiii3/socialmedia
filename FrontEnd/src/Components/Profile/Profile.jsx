@@ -9,7 +9,7 @@ const Profile = () => {
 
   const getUserDetail = async () => {
     await axios
-      .get(`https://socialmedia-1eyo.vercel.app/api/v2/user/${id}`)
+      .get(`http://localhost:4000/api/v2/user/${id}`)
       .then((res) => setUserData(res.data[0]))
       .catch((err) => console.log(err.response.data.message));
   };
