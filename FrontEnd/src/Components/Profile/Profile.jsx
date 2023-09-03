@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Avatar } from "@nextui-org/react";
 import {Card, CardBody, Image} from "@nextui-org/react";
+import { VscVerifiedFilled } from "react-icons/vsc";
 const Profile = () => {
   const [UserData, setUserData] = useState();
   const { id } = useParams();
@@ -13,7 +14,7 @@ const Profile = () => {
       .then((res) => setUserData(res.data[0]))
       .catch((err) => console.log(err.response.data.message));
   };
-
+console.log(UserData);
   useEffect(() => {
     getUserDetail();
   }, []);
@@ -28,9 +29,24 @@ const Profile = () => {
           />
         </div>
         <div className="md:ml-20 mt-4">
-          <h1 className="md:text-2xl  text-xl font-bold text-center md:text-left">
-            {UserData?.user_name}
-          </h1>
+
+        <div className="flex items-center justify-center	md:justify-start">
+                   
+                    <h1 className="md:text-2xl  text-xl font-bold text-center md:text-left">
+                      {UserData?.user_name}
+                      </h1>
+                    {
+            UserData?.user_verified === true ? (
+                      <VscVerifiedFilled
+                        size={25}
+                        className=" text-sky-500 mx-1"
+                      />
+                    ) : null
+                    }
+
+                  </div>
+
+         
           <p className="text-center md:text-left my-1">Total Post : 10</p>
           <p className="my-2 text-justify">
             I'm more than what you see me on Insta stories.

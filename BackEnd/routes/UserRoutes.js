@@ -135,6 +135,16 @@ const data = [
       user_verified: true,
       user_caption: "🖤",
     },
+    {
+      user_id: 14,
+      user_name: "Siddhi Dound",
+      user_avatar:
+        "https://res.cloudinary.com/dmuhioahv/image/upload/v1693744805/IMG_8662_pxfd3u.jpg",
+      user_profile:
+        "https://res.cloudinary.com/dmuhioahv/image/upload/v1693744805/IMG_8663_iukngm.jpg",
+      user_verified: true,
+      user_caption: "Smile, it confuses people.",
+    },
   ]
 router.get("/user", (req, res) => {
     res.json(data);

@@ -82,7 +82,7 @@ export const Navbarr = () => {
         <NavbarItem>
           <Link
             className="w-full cursor-pointer text-black"
-            href="/login"
+            href="/main"
             size="lg"
           >
             Home
