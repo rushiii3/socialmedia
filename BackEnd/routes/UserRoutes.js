@@ -11,16 +11,16 @@ const data = [
       user_verified: true,
       user_caption: "If you feel good, you’ll look good.",
     },
-    {
-      user_id: 2,
-      user_name: "Sameeksha Kadam",
-      user_avatar:
-        "https://github.com/rushiii3/3d-Web/blob/main/IMG_8359.jpg?raw=true",
-      user_profile:
-        "https://github.com/rushiii3/3d-Web/blob/main/IMG_7333.JPG?raw=true",
-      user_verified: true,
-      user_caption: "Sparkling lil more today.",
-    },
+    // {
+    //   user_id: 2,
+    //   user_name: "Sameeksha Kadam",
+    //   user_avatar:
+    //     "https://github.com/rushiii3/3d-Web/blob/main/IMG_8359.jpg?raw=true",
+    //   user_profile:
+    //     "https://github.com/rushiii3/3d-Web/blob/main/IMG_7333.JPG?raw=true",
+    //   user_verified: true,
+    //   user_caption: "Sparkling lil more today.",
+    // },
     {
       user_id: 3,
       user_name: "Shah Rukh Khan",
@@ -43,26 +43,26 @@ const data = [
       user_caption:
         "Everyone wants magic! We just need to remember that it’s within us 🙃💫💗",
     },
-    {
-      user_id: 5,
-      user_name: "Aryan Bagwe",
-      user_avatar:
-        "https://raw.githubusercontent.com/rushiii3/3d-Web/main/279907819_152938000560679_2402490576133044689_n.jpeg",
-      user_profile:
-        "https://raw.githubusercontent.com/rushiii3/3d-Web/main/326136219_751815036276540_8479462550059267995_n.jpeg",
-      user_verified: true,
-      user_caption: "Who said I cant get beaches ?? ⛱",
-    },
-    {
-      user_id: 6,
-      user_name: "Pratik Kumbhar",
-      user_avatar:
-        "https://raw.githubusercontent.com/rushiii3/3d-Web/main/323546594_131819519518387_9066922192399205285_n.jpg",
-      user_profile:
-        "https://raw.githubusercontent.com/rushiii3/3d-Web/main/322146387_1194503278146253_4811995216149507425_n.jpg",
-      user_verified: true,
-      user_caption: "Golden hour fashion🌅",
-    },
+    // {
+    //   user_id: 5,
+    //   user_name: "Aryan Bagwe",
+    //   user_avatar:
+    //     "https://raw.githubusercontent.com/rushiii3/3d-Web/main/279907819_152938000560679_2402490576133044689_n.jpeg",
+    //   user_profile:
+    //     "https://raw.githubusercontent.com/rushiii3/3d-Web/main/326136219_751815036276540_8479462550059267995_n.jpeg",
+    //   user_verified: true,
+    //   user_caption: "Who said I cant get beaches ?? ⛱",
+    // },
+    // {
+    //   user_id: 6,
+    //   user_name: "Pratik Kumbhar",
+    //   user_avatar:
+    //     "https://raw.githubusercontent.com/rushiii3/3d-Web/main/323546594_131819519518387_9066922192399205285_n.jpg",
+    //   user_profile:
+    //     "https://raw.githubusercontent.com/rushiii3/3d-Web/main/322146387_1194503278146253_4811995216149507425_n.jpg",
+    //   user_verified: true,
+    //   user_caption: "Golden hour fashion🌅",
+    // },
     {
       user_id: 7,
       user_name: "Kartik Aaryan",
@@ -125,26 +125,26 @@ const data = [
       user_verified: false,
       user_caption: "Seize the day, be your own Hero ❤️💪",
     },
-    {
-      user_id: 13,
-      user_name: "Vandana Padhi",
-      user_avatar:
-        "https://raw.githubusercontent.com/rushiii3/3d-Web/main/322493247_1627497147701752_8441297061507991597_n.jpeg",
-      user_profile:
-        "https://raw.githubusercontent.com/rushiii3/3d-Web/main/314735701_847856479977445_4134909197560907528_n.jpeg",
-      user_verified: true,
-      user_caption: "🖤",
-    },
-    {
-      user_id: 14,
-      user_name: "Siddhi Dound",
-      user_avatar:
-        "https://res.cloudinary.com/dmuhioahv/image/upload/v1693744805/IMG_8662_pxfd3u.jpg",
-      user_profile:
-        "https://res.cloudinary.com/dmuhioahv/image/upload/v1693744805/IMG_8663_iukngm.jpg",
-      user_verified: true,
-      user_caption: "Smile, it confuses people.",
-    },
+    // {
+    //   user_id: 13,
+    //   user_name: "Vandana Padhi",
+    //   user_avatar:
+    //     "https://raw.githubusercontent.com/rushiii3/3d-Web/main/322493247_1627497147701752_8441297061507991597_n.jpeg",
+    //   user_profile:
+    //     "https://raw.githubusercontent.com/rushiii3/3d-Web/main/314735701_847856479977445_4134909197560907528_n.jpeg",
+    //   user_verified: true,
+    //   user_caption: "🖤",
+    // },
+    // {
+    //   user_id: 14,
+    //   user_name: "Siddhi Dound",
+    //   user_avatar:
+    //     "https://res.cloudinary.com/dmuhioahv/image/upload/v1693744805/IMG_8662_pxfd3u.jpg",
+    //   user_profile:
+    //     "https://res.cloudinary.com/dmuhioahv/image/upload/v1693744805/IMG_8663_iukngm.jpg",
+    //   user_verified: true,
+    //   user_caption: "Smile, it confuses people.",
+    // },
   ]
 router.get("/user", (req, res) => {
     res.json(data);
