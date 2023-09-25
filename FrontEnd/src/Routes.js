@@ -3,7 +3,9 @@ import { Login } from "./Pages/Login";
 import { ErrorPage } from "./Pages/ErrorPage";
 import {SignUpPage} from './Pages/SignUpPage';
 import {About} from './Pages/About';
-import ProfilePage from './Pages/ProfilePage'
+import ProfilePage from './Pages/ProfilePage';
+import AddPostPage from './Pages/AddPostPage';
+import ThreexThree from './Pages/ThreexThree';
 export {
     ErrorPage,
     Main,
@@ -11,4 +13,6 @@ export {
     SignUpPage,
     About,
     ProfilePage,
+    AddPostPage,
+    ThreexThree
 }

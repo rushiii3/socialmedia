@@ -1,10 +1,13 @@
-import { Button , Input,Link } from '@nextui-org/react'
+import { Button , Input } from '@nextui-org/react'
 import React, { useEffect, useState } from 'react'
 import {provider} from '../config/firebase'
-import {signInWithPopup,signInWithEmailAndPassword , getAuth} from 'firebase/auth'
+import {signInWithPopup, getAuth} from 'firebase/auth'
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
+import axios from 'axios';
+import { server } from '../server';
+import {Link} from 'react-router-dom'
 export const Login = () => {
   const auth = getAuth();
   const navigator =  useNavigate();
@@ -17,39 +20,51 @@ export const Login = () => {
     }
   }, [user])
   
-  const handleLogin = () => {
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      console.log(user);
-      toast.success("Login Success!");
-      // ...
+  const handleLogin = async() => {
+    console.log("yes");
+    const data = {
+      "email":email,
+      "password":password
+    }
+    await axios.post(`${server}/user/login`,data,{withCredentials:true}).then((res) => {
+        toast.success("Login success");
+        navigator("/main");
+      
+     console.log(res.data.success);
+    }).catch((error) => {
+
+      toast.error(error.response.data.message)
+      
     })
-    .catch((error) => {
+    // signInWithEmailAndPassword(auth, email, password)
+    // .then((userCredential) => {
+    //   // Signed in 
+    //   const user = userCredential.user;
+    //   console.log(user);
+    //   toast.success("Login Success!");
+    //   // ...
+    // })
+    // .catch((error) => {
 
-      console.log(error.code);
-      if (error.code === "auth/invalid-email") {
-        console.log("Invalid email format.");
-        toast.error("Invalid email format.");
-      } else if (error.code === "auth/user-disabled") {
-        console.log("This user account has been disabled.");
-        toast.error("This user account has been disabled.");
-      } else if (error.code === "auth/wrong-password") {
-        console.log("Incorrect password.");
-        toast.error("Incorrect password.");
-      } else if (error.code === "auth/user-not-found") {
-        console.log("Email Not Found");
-        toast.error("Email Not Found");
-      } else {
-        console.log("An error occurred during authentication.");
-        toast.error("An error occurred during authentication.");
-      }
-    });
+    //   console.log(error.code);
+    //   if (error.code === "auth/invalid-email") {
+    //     console.log("Invalid email format.");
+    //     toast.error("Invalid email format.");
+    //   } else if (error.code === "auth/user-disabled") {
+    //     console.log("This user account has been disabled.");
+    //     toast.error("This user account has been disabled.");
+    //   } else if (error.code === "auth/wrong-password") {
+    //     console.log("Incorrect password.");
+    //     toast.error("Incorrect password.");
+    //   } else if (error.code === "auth/user-not-found") {
+    //     console.log("Email Not Found");
+    //     toast.error("Email Not Found");
+    //   } else {
+    //     console.log("An error occurred during authentication.");
+    //     toast.error("An error occurred during authentication.");
+    //   }
+    // });
   }
-  
-  
-
   const SignwithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth,provider);
@@ -72,7 +87,8 @@ export const Login = () => {
 
         </div>
         <p className='text-center my-auto'>
-        <Link color="foreground"  href="/sign-up">
+          
+        <Link  to="/sign-up">
             Don't have an account? Sign up
           </Link>
         </p>

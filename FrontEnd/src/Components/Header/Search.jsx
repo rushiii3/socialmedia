@@ -18,7 +18,7 @@ import { VscVerifiedFilled } from "react-icons/vsc";
 import {server} from '../../server';
 export const Search = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [PostData, setPostData] = useState([]);
+  const [PostData, setPostData] = useState([""]);
   const [Search, setSearch] = useState("");
   const [Counter, setCounter] = useState(false);
   const handleSearch = async(e) => {

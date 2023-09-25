@@ -1,5 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const asyncHandler = require('express-async-handler');
+const { createUser, loginUser, ActivationUser, getUser, } = require("../Controllers/UserController");
+const jwt = require('jsonwebtoken');
 const data = [
     {
       user_id: 1,
@@ -163,6 +166,13 @@ router.get("/user/:id", (req, res) => {
     }
     res.send(usrv);
   });
+  
+  router.post('/register',createUser);
+  router.post('/activation',ActivationUser);
+  router.post('/login',loginUser);
+  router.get('/getuser',getUser);
+  
+ 
 
   
   

@@ -49,7 +49,7 @@ export const Navbarr = () => {
       <NavbarContent justify="end">
         {user !== null ? (
           <>
-            <p>hello</p>
+           
             {/*
             <Avatar
               src={
@@ -63,8 +63,8 @@ export const Navbarr = () => {
           </>
         ) : (
           <>
-            <Search />
-            <NavbarItem>
+            {/* <Search /> */}
+            {/* <NavbarItem>
               <Button as={Link} href="/login" className="bg-white">
                 Login
               </Button>
@@ -73,7 +73,7 @@ export const Navbarr = () => {
               <Button as={Link} color="primary" href="/login" variant="flat">
                 Sign Up
               </Button>
-            </NavbarItem>
+            </NavbarItem> */}
           </>
         )}
       </NavbarContent>
@@ -82,7 +82,7 @@ export const Navbarr = () => {
         <NavbarItem>
           <Link
             className="w-full cursor-pointer text-black"
-            href="/main"
+            to="/main"
             size="lg"
           >
             Home

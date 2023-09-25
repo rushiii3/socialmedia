@@ -1,7 +1,7 @@
-import { Button, Input, Link } from "@nextui-org/react";
+import { Button, Input} from "@nextui-org/react";
 import React, { useState } from "react";
 import { auth, provider } from "../config/firebase";
-import { signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,6 +9,10 @@ import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import {server} from '../server'
+import {Link} from 'react-router-dom';
+import CircularScrollIndicator from "./Circular";
 export const SignUpPage = () => {
   const navigator = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
@@ -16,6 +20,9 @@ export const SignUpPage = () => {
   const toggleVisibility = () => setIsVisible(!isVisible);
   const toggleVisibility1 = () => setIsVisible1(!isVisible1);
   const schema = yup.object().shape({
+    username: yup
+      .string()
+      .required("Please provide a username"),
     email: yup
       .string()
       .email("Invalid Email")
@@ -42,38 +49,15 @@ export const SignUpPage = () => {
   });
 
   const onSubmit = async (data) => {
-    try {
-      console.log(data.email);
-      console.log(data.password);
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        data.email,
-        data.password
-      );
-      //const user = userCredential.user;
-      toast.success("Registered Success!");
+    console.log(data);
+    await axios.post(`${server}/user/register`,data,{withCredentials:true}).then((res) => {
+      toast.success(res.data.message);
+      console.log(res.d);
       reset();
-      navigator("/login");
-      // Continue with the rest of your code after successful authentication
-    } catch (error) {
-      // Handle the error here
-      if (error.code === "auth/invalid-email") {
-        console.log("Invalid email format.");
-        toast.error("Invalid email format.");
-      } else if (error.code === "auth/user-disabled") {
-        console.log("This user account has been disabled.");
-        toast.error("This user account has been disabled.");
-      } else if (error.code === "auth/wrong-password") {
-        console.log("Incorrect password.");
-        toast.error("Incorrect password.");
-      } else if (error.code === "auth/email-already-in-use") {
-        console.log("Email already Exist");
-        toast.error("Email already Exist");
-      } else {
-        console.log("An error occurred during authentication.");
-        toast.error("An error occurred during authentication.");
-      }
-    }
+    }).catch((error) => {
+      console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    }) 
   };
 
   const SignwithGoogle = async () => {
@@ -104,10 +88,23 @@ export const SignUpPage = () => {
     }
   };
   return (
+    
     <div className="h-[100vh] flex items-center bg-slate-200">
+      <CircularScrollIndicator />
       <div className="w-[90%]  md:w-[40%] rounded-xl bg-white  mx-auto p-5">
         <p className="text-2xl font-bold">Sign Up</p>
         <form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+            type="text"
+            variant="underlined"
+            label="Username"
+            labelPlacement="outside"
+            placeholder="Enter your username"
+            className="text-2xl mt-4"
+            {...register("username")}
+            validationState={errors.username?.message ? "invalid" : "valid"}
+            errorMessage={errors.username?.message}
+          />
           <Input
             type="email"
             variant="underlined"
@@ -183,8 +180,8 @@ export const SignUpPage = () => {
           </div>
         </form>
         <p className="text-center my-auto">
-          <Link color="foreground" href="/login">
-            Already have an account? Login
+          <Link  to="/login">
+          Already have an account? Login
           </Link>
         </p>
         <p className="text-center my-2">OR</p>
