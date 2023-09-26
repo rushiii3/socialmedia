@@ -1,4 +1,4 @@
-import { Button, Input} from "@nextui-org/react";
+import { Button, Input,Spinner} from "@nextui-org/react";
 import React, { useState } from "react";
 import { auth, provider } from "../config/firebase";
 import { signInWithPopup } from "firebase/auth";
@@ -17,6 +17,7 @@ export const SignUpPage = () => {
   const navigator = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const [isVisible1, setIsVisible1] = useState(false);
+  const [isloading, setisloading] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
   const toggleVisibility1 = () => setIsVisible1(!isVisible1);
   const schema = yup.object().shape({
@@ -49,12 +50,14 @@ export const SignUpPage = () => {
   });
 
   const onSubmit = async (data) => {
+    setisloading(true);
     console.log(data);
     await axios.post(`${server}/user/register`,data,{withCredentials:true}).then((res) => {
       toast.success(res.data.message);
-      console.log(res.d);
       reset();
+      setisloading(false);
     }).catch((error) => {
+      setisloading(false);
       console.log(error.response.data.message);
       toast.error(error.response.data.message);
     }) 
@@ -174,8 +177,9 @@ export const SignUpPage = () => {
             <Button
               type="submit"
               className=" w-1/4 bg-primary-500 text-white my-4"
+              isDisabled={isloading}
             >
-              Submit
+             {isloading === true ? <Spinner color="default" /> : "Submit"}
             </Button>
           </div>
         </form>

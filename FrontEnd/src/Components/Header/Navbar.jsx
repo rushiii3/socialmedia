@@ -97,7 +97,10 @@ export const Navbarr = () => {
             </NavbarItem>
             <NavbarItem>
               <Button  color="primary"  variant="flat">
-                Sign Up
+              <Link to="/sign-up">
+              Sign Up
+              </Link>
+               
               </Button>
             </NavbarItem>
             </>
