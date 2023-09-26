@@ -1,1 +1,1 @@
-export const server = "https://socialmedia-1eyo.vercel.app/api/v2";
+export const server = "http://localhost:4000/api/v2";
