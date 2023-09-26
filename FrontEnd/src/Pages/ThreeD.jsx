@@ -11,7 +11,7 @@ const ThreeD = () => {
         <ambientLight intensity={0.1} />
         <directionalLight position={[3.3, 1.0, 4.4]} intensity={1} />
           <Model scale={[10, 10, 10]}/>
-          <OrbitControls target={[0, 1, 0]} autoRotate />
+          <OrbitControls target={[1, 1, 1]} autoRotate />
           <Environment preset='sunset' />
      
         </Suspense>
