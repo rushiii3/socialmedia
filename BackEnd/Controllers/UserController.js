@@ -39,7 +39,6 @@ const createUser = asyncHandler(async (req, res) => {
   }
 });
 const createActivationToken = (user) => {
-  
   return jwt.sign(user, `${process.env.ACTIVATION_SECRET}`, {
     expiresIn: "5m",
   });
@@ -53,7 +52,7 @@ const ActivationUser = asyncHandler(async (req, res, next) => {
 
     const newUser = jwt.verify(
       activation_token,
-      process.env.ACTIVATION_SECRET,
+      `${process.env.ACTIVATION_SECRET}`,
       (err, decoded) => {
         if (err) {
           if (err.name === "TokenExpiredError") {
