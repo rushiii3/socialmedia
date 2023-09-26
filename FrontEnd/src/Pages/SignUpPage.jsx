@@ -135,9 +135,9 @@ export const SignUpPage = () => {
                 onClick={toggleVisibility1}
               >
                 {isVisible1 ? (
-                  <BsEye className="text-2xl pointer-events-none" />
+                  <BsEye className="text-2xl pointer-events-none rotate-0" />
                 ) : (
-                  <BsEyeSlash className="text-2xl  pointer-events-none" />
+                  <BsEyeSlash className="text-2xl  pointer-events-none rotate-0" />
                 )}
               </button>
             }
@@ -163,9 +163,9 @@ export const SignUpPage = () => {
                 onClick={toggleVisibility}
               >
                 {isVisible ? (
-                  <BsEye className="text-2xl pointer-events-none" />
+                  <BsEye className="text-2xl pointer-events-none rotate-0" />
                 ) : (
-                  <BsEyeSlash className="text-2xl  pointer-events-none" />
+                  <BsEyeSlash className="text-2xl  pointer-events-none rotate-0" />
                 )}
               </button>
             }

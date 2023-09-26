@@ -29,7 +29,7 @@ export const Login = () => {
     await axios.post(`${server}/user/login`,data,{withCredentials:true}).then((res) => {
         toast.success("Login success");
         navigator("/main");
-      
+        window.location.reload(true);
      console.log(res.data.success);
     }).catch((error) => {
 

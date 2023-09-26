@@ -5,7 +5,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const MongoURl = process.env.MONGO_URL;
 const port = process.env.PORT || 4000;
-const cookieParser = require("cookie-parser");
+const cookieParser = require('cookie-parser');
 const productRoute = require("./routes/ProductRoutes");
 const errorHandler = require("./Middleware/ErrorHandler");
 const UserRoutes = require('./routes/UserRoutes');
@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["https://socialmedia-gilt.vercel.app"],
     credentials: true,
   })
 );

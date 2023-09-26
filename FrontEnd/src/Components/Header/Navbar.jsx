@@ -1,32 +1,40 @@
 import React from "react";
-import { getAuth, signOut } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
-
+import { Link } from "react-router-dom";
 import {
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Link,
   Button,
   NavbarMenu,
   NavbarMenuToggle,
-
 } from "@nextui-org/react";
-import { Search } from "./Search";
+import { useNavigate } from 'react-router-dom';
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  User,
+} from "@nextui-org/react";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+
+import axios from "axios";
+import { server } from "../../server";
 export const Navbarr = () => {
-  
-  const auth = getAuth();
-  const [user] = useAuthState(auth);
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        console.log("Loggedout");
-      })
-      .catch((error) => {
-        // An error happened.
-      });
+  const navigator = useNavigate();
+  const {loading,isAuthenticated,user} = useSelector((state)=>state.user);
+  const handleLogout = async() => {
+    try {
+      const {data} = await axios.get(`${server}/user/logout`,{withCredentials:true});
+      console.log(data.message);
+      toast.success("Login success");
+        navigator("/login");
+        window.location.reload(true);
+    } catch (error) {
+      
+    }
   };
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   return (
@@ -47,57 +55,83 @@ export const Navbarr = () => {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        {user !== null ? (
-          <>
-           
-            {/*
-            <Avatar
-              src={
-                user?.photoURL ||
-                "https://img.freepik.com/premium-vector/anime-cartoon-character-vector-illustration_648489-34.jpg"
-              }
-              size="md"
+        <>
+        {
+          isAuthenticated === true ? (<Dropdown placement="bottom-start">
+          <DropdownTrigger>
+            <User
+              as="button"
+              avatarProps={{
+                isBordered: false,
+                src: "https://img.freepik.com/premium-vector/anime-cartoon-character-vector-illustration_648489-34.jpg",
+              }}
+              className="transition-transform"
+              name={user?.user?.username}
             />
-            <span className="font-semibold">{user?.displayName === "" ? user?.displayName : "RandomUser"}</span>
-            */}
-          </>
+          </DropdownTrigger>
+          <DropdownMenu aria-label="User Actions" variant="flat">
+            <DropdownItem key="profile" className="h-14 gap-2">
+              <p className="font-bold">Signed in as</p>
+              <p className="font-bold">{user?.user?.email}</p>
+            </DropdownItem>
+            <DropdownItem key="settings">My Settings</DropdownItem>
+            {/* <DropdownItem key="team_settings">Team Settings</DropdownItem>
+        <DropdownItem key="analytics">
+          Analytics
+        </DropdownItem>
+        <DropdownItem key="system">System</DropdownItem>
+        <DropdownItem key="configurations">Configurations</DropdownItem>
+        <DropdownItem key="help_and_feedback">
+          Help & Feedback
+        </DropdownItem> */}
+          </DropdownMenu>
+        </Dropdown>
         ) : (
           <>
-            {/* <Search /> */}
-            {/* <NavbarItem>
-              <Button as={Link} href="/login" className="bg-white">
-                Login
+          <NavbarItem>
+              <Button className="bg-white">
+              <Link to="/login">
+              Login
+              </Link>
               </Button>
             </NavbarItem>
             <NavbarItem>
-              <Button as={Link} color="primary" href="/login" variant="flat">
+              <Button  color="primary"  variant="flat">
                 Sign Up
               </Button>
-            </NavbarItem> */}
-          </>
-        )}
+            </NavbarItem>
+            </>
+        )
+        }
+         
+          
+        </>
       </NavbarContent>
 
       <NavbarMenu>
         <NavbarItem>
-          <Link
-            className="w-full cursor-pointer text-black"
+          <Button
+            className="w-full cursor-pointer text-black bg-white"
+            size="lg"
+          >
+            <Link to="/main">Home</Link>
+          </Button>
+        </NavbarItem>
+        {
+          isAuthenticated===true ? (
+            <NavbarItem>
+          <Button
+            className="w-full cursor-pointer text-black bg-white"
             to="/main"
             size="lg"
-          >
-            Home
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link
-            color={"danger"}
-            className="w-full cursor-pointer"
             onClick={handleLogout}
-            size="lg"
           >
-            Log Out
-          </Link>
+            Logout
+          </Button>
         </NavbarItem>
+          ) : (null)
+        }
+        
       </NavbarMenu>
     </Navbar>
   );

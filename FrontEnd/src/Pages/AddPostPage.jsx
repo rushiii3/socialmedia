@@ -9,7 +9,11 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {MdCancel} from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
 const AddPostPage = () => {
+
+  
+  const { user } = useSelector((state) => state.user);
   const navigator =  useNavigate();
   const schema = yup.object().shape({
     caption: yup
@@ -43,7 +47,7 @@ const AddPostPage = () => {
     await axios
       .post(
         `${server}/post/add-post`,
-        { caption, image },
+        { caption, image, user},
         {
           headers: {
             "Content-Type": "multipart/form-data",

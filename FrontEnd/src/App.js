@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import Store from './redux/store';
 import {LoadUser} from './redux/actions/user';
 import { LoadPost } from './redux/actions/post';
+import ProtectedUser from './Protected/ProtectedUser';
 function App() {
   useEffect(() => {
     Store.dispatch(LoadUser());
@@ -46,7 +47,11 @@ theme="light"
           <Route path='/about' element={<About />}/>
           <Route path='/main' element={<Main />}/>
           <Route path='/profile/:id' element={<ProfilePage />} />
-          <Route path='/addpost' element={<AddPostPage />} />
+          <Route path='/addpost' element={
+            <ProtectedUser>
+              <AddPostPage />
+            </ProtectedUser>
+          } />
           <Route path='/activation/:activation_token' element={<Activation />} />
           <Route path='/3x3' element={<ThreexThree />} />
           <Route path='/3d' element={<ThreeD />} />

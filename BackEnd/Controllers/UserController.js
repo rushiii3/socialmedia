@@ -108,12 +108,8 @@ const loginUser = asyncHandler(async (req, res, next) => {
       res.status(400);
       throw new Error("Please provide the correct information");
     }
-    const payload = {
-      userId: user, // You can include any user-related information here
-      // Add any other properties you want in the payload
-    };
-    const UserToken = jwt.sign(payload, process.env.ACTIVATION_SECRET);
-    
+    console.log(JSON.stringify(user));
+    const UserToken = jwt.sign(JSON.stringify(user), process.env.JWT_SECRET);
     sendToken(UserToken, 201, res);
   } catch (error) {
     console.log(error);
@@ -123,13 +119,46 @@ const loginUser = asyncHandler(async (req, res, next) => {
 });
 
 const getUser = asyncHandler(async(req,res,next) => {
-  res.send("hello");
+  try {
+    const user = await User.findById(req.user);
+    if(!user){
+      res.status(400);
+      throw new Error("User doesn't exists");
+    }
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+      res.status(500);
+      throw new Error(error.message);
+  }
+  console.log(req.user);
+  
 }) 
 
+const logoutUser = asyncHandler(async(req,res,next) => {
+  try {
+    res.cookie("token", null, {
+      expires: new Date(Date.now()),
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    });
+    res.status(201).json({
+      success: true,
+      message: "Log out successful!",
+    });
+  } catch (error) {
+      res.status(500);
+      throw new Error(error.message);
+  }
+})
 
 module.exports = {
   createUser,
   ActivationUser,
   loginUser,
-  getUser
+  getUser,
+  logoutUser
 };

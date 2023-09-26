@@ -15,6 +15,8 @@ const upload = multer({ storage: storage });
 // Import your controller functions
 const { createPost, getPost } = require("../Controllers/PostController");
 // Define routes
+
+
 router.post("/add-post", upload.single("image"), createPost); // Single file upload with the field name 'image'
 router.get("/get-post", getPost);
 module.exports = router;

@@ -19,12 +19,13 @@ export const MainContent = () => {
 
   return (
     <div className=" mx-auto  p-5">
-       <CircularScrollIndicator />
+
+    
       {PostData.map((values,key) => {
         return (
             <Post key={key} values={values}/>
         );
       })}
-    </div>
-  );
-};
+</div>
+  )}
+
