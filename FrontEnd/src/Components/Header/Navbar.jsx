@@ -29,7 +29,7 @@ export const Navbarr = () => {
     try {
       const {data} = await axios.get(`${server}/user/logout`,{withCredentials:true});
       console.log(data.message);
-      toast.success("Login success");
+      toast.success(data.message);
         navigator("/login");
         window.location.reload(true);
     } catch (error) {

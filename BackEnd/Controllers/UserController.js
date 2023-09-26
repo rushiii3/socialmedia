@@ -22,7 +22,7 @@ const createUser = asyncHandler(async (req, res) => {
     password,
   };
   const activationToken = createActivationToken(user);
-  const activationURL = `http://localhost:3000/activation/${activationToken}`;
+  const activationURL = `https://socialmedia-gilt.vercel.app/activation/${activationToken}`;
   try {
     await sendMail({
       email: user.email,
