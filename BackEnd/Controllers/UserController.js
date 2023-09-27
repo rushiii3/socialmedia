@@ -118,10 +118,10 @@ const loginUser = asyncHandler(async (req, res, next) => {
   }
 });
 
-const getUser = asyncHandler(async(req,res,next) => {
+const getUser = asyncHandler(async (req, res, next) => {
   try {
     const user = await User.findById(req.user);
-    if(!user){
+    if (!user) {
       res.status(400);
       throw new Error("User doesn't exists");
     }
@@ -130,14 +130,13 @@ const getUser = asyncHandler(async(req,res,next) => {
       user,
     });
   } catch (error) {
-      res.status(500);
-      throw new Error(error.message);
+    res.status(500);
+    throw new Error(error.message);
   }
   console.log(req.user);
-  
-}) 
+});
 
-const logoutUser = asyncHandler(async(req,res,next) => {
+const logoutUser = asyncHandler(async (req, res, next) => {
   try {
     res.cookie("token", null, {
       expires: new Date(Date.now()),
@@ -150,15 +149,15 @@ const logoutUser = asyncHandler(async(req,res,next) => {
       message: "Log out successful!",
     });
   } catch (error) {
-      res.status(500);
-      throw new Error(error.message);
+    res.status(500);
+    throw new Error(error.message);
   }
-})
+});
 
 module.exports = {
   createUser,
   ActivationUser,
   loginUser,
   getUser,
-  logoutUser
+  logoutUser,
 };

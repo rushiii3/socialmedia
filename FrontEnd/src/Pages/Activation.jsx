@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { server } from '../server';
 
 const Activation = () => {
+  const navigate = useNavigate()
     const { activation_token } = useParams();
     const [error, seterror] = useState(false);
     useEffect(() => {
@@ -11,6 +12,9 @@ const Activation = () => {
             const sendRequest = async() => {
                 await axios.post(`${server}/user/activation`,{activation_token}).then((res) => {
                     console.log(res);
+                    setTimeout(() => {
+                      navigate('/login');
+                    }, 3000);
                 }).catch((error) => {
                     seterror(true);
                     console.log(error);

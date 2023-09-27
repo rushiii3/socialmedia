@@ -1,7 +1,5 @@
 import { Button, Input,Spinner} from "@nextui-org/react";
 import React, { useState } from "react";
-import { auth, provider } from "../config/firebase";
-import { signInWithPopup } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,8 +11,15 @@ import axios from 'axios';
 import {server} from '../server'
 import {Link} from 'react-router-dom';
 import CircularScrollIndicator from "./Circular";
+import { useSelector } from "react-redux";
 export const SignUpPage = () => {
-  const navigator = useNavigate();
+  const navigator =  useNavigate();
+  const {loading,isAuthenticated} = useSelector((state)=>state.user);
+  if(loading===false){
+    if(isAuthenticated){
+        navigator('/main');
+    }
+  }
   const [isVisible, setIsVisible] = useState(false);
   const [isVisible1, setIsVisible1] = useState(false);
   const [isloading, setisloading] = useState(false);
@@ -61,34 +66,6 @@ export const SignUpPage = () => {
       console.log(error.response.data.message);
       toast.error(error.response.data.message);
     }) 
-  };
-
-  const SignwithGoogle = async () => {
-    try {
-       
-      const result = await signInWithPopup(auth, provider);
-      console.log(result);
-      toast.success("Registered Success!");
-      navigator("/");
-    } catch (error) {
-      console.log(error.code);
-      if (error.code === "auth/invalid-email") {
-        console.log("Invalid email format.");
-        toast.error("Invalid email format.");
-      } else if (error.code === "auth/user-disabled") {
-        console.log("This user account has been disabled.");
-        toast.error("This user account has been disabled.");
-      } else if (error.code === "auth/wrong-password") {
-        console.log("Incorrect password.");
-        toast.error("Incorrect password.");
-      } else if (error.code === "auth/email-already-in-use") {
-        console.log("Email already Exist");
-        toast.error("Email already Exist");
-      } else {
-        console.log("An error occurred during authentication.");
-        toast.error("An error occurred during authentication.");
-      }
-    }
   };
   return (
     
@@ -184,26 +161,11 @@ export const SignUpPage = () => {
           </div>
         </form>
         <p className="text-center my-auto">
-          <Link  to="/login">
-          Already have an account? Login
+          
+          Already have an account? <Link  to="/login" className="text-blue-500 underline"> Login
           </Link>
         </p>
-        <p className="text-center my-2">OR</p>
-        <div className="mx-auto text-center">
-          <Button
-            onClick={SignwithGoogle}
-            className="mt-4 w-[90%]  bg-white border-3"
-          >
-            <span>
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png"
-                className="h-[20px]"
-                alt=""
-              />
-            </span>
-            Continue with Google
-          </Button>
-        </div>
+        
       </div>
     </div>
   );
