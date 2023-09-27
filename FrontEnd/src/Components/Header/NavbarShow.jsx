@@ -5,7 +5,7 @@ const NavbarShow = ({children}) => {
     const Location  = useLocation();
     const [Show, setShow] = useState(false);
     useEffect(() => {
-      if(Location.pathname==="/Login" || Location.pathname==="/login" || Location.pathname==="/"){
+      if(Location.pathname==="/Login" || Location.pathname==="/login"){
         setShow(false);
       }else if(Location.pathname==="/main" || Location.pathname==="/about" || Location.pathname==="/addpost"){
         console.log(Location.pathname);
