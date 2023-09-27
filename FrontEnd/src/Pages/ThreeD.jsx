@@ -6,12 +6,12 @@ import { Environment, OrbitControls } from '@react-three/drei';
 const ThreeD = () => {
   return (
     <div className='h-screen w-screen bg-sky-200'>
-       <Canvas  camera={{ position: [500, 200, 200], fov: 5 }}>
+       <Canvas  camera={{ position: [5,5,5], fov: 30 }} shadows>
         <Suspense fallback={null} >
         <ambientLight intensity={0.1} />
         <directionalLight position={[3.3, 1.0, 4.4]} intensity={1} />
-          <Model scale={[10, 10, 10]}/>
-          <OrbitControls target={[1, 1, 1]} autoRotate />
+          <Model/>
+          <OrbitControls target={[0,0,0]} autoRotate />
           <Environment preset='sunset' />
      
         </Suspense>

@@ -54,11 +54,11 @@ function App() {
         </NavbarShow>
         <Routes>
           <Route path="*" element={<ErrorPage />} />
-          <Route path="/" element={<Home />} />
+          {/* <Route path="/" element={<Home />} /> */}
           <Route path="/Login" element={<Login />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/about" element={<About />} />
-          <Route path="/main" element={<Main />} />
+          <Route path="/" element={<Main />} />
           <Route path="/profile/:id" element={<ProfilePage />} />
           <Route
             path="/addpost"

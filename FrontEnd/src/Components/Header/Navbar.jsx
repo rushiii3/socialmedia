@@ -117,7 +117,7 @@ export const Navbarr = () => {
             className="w-full cursor-pointer text-black bg-white"
             size="lg"
           >
-            <Link to="/main">Home</Link>
+            <Link to="/">Home</Link>
           </Button>
         </NavbarItem>
         {

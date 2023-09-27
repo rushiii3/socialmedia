@@ -11,7 +11,7 @@ export const Login = () => {
   const {loading,isAuthenticated} = useSelector((state)=>state.user);
   if(loading===false){
     if(isAuthenticated){
-        navigator('/main');
+        navigator('/');
     }
   }
   const [email, setemail] = useState("");
