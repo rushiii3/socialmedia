@@ -26,7 +26,7 @@ export const Login = () => {
       const serverData = await axios.post(`${server}/user/login`,data,{withCredentials:true});
       if(serverData.data.success){
         toast.success("Login Success!");
-        navigator("/main");
+        navigator("/");
         window.location.reload(true);
       }
     } catch (error) {
