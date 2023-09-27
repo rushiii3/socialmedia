@@ -9,7 +9,7 @@ export const postReducer = createReducer(iniialState,{
     LoadPostSuccess:(state,action) => {
         state.isAuthenticated = true;
         state.loading = false;
-        state.user = action.payload;
+        state.post = action.payload;
     },
     LoadPostError:(state,action) => {
         state.loading = false;

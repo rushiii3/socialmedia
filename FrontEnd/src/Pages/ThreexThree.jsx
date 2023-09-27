@@ -1,8 +1,21 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 const ThreexThree = () => {
+  const {post,loading} = useSelector((state) => state.post);
+  const [Data, setData] = useState([""]);
+
+  useEffect(() => {
+    if (!loading && post) { // Check if post is defined
+      console.log(post);
+      setData(post)
+    }
+  }, [post, loading]);
+
+  console.log(Data);
   const [firstClick, setfirstClick] = useState([]);
   const [ColorArray, setColorArray] = useState([, , , , , , , ,]);
   function delay(millisec) {
+   
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve("");
@@ -56,6 +69,16 @@ const ThreexThree = () => {
             </button>
           );
         })}
+      </div>
+
+      <div className="text-center">
+{
+    Data.map((values,key)=>{
+      return (<p key={key}>
+        {values.caption}
+      </p>)
+    })
+}
       </div>
     </div>
   );
