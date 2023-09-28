@@ -19,6 +19,7 @@ export const Login = () => {
   // }
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  const [DegubData, setDegubData] = useState("");
   const handleLogin = async() => {
     console.log("yes");
     const data = {
@@ -28,7 +29,9 @@ export const Login = () => {
     try {
       const serverData = await axios.post(`${server}/user/login`,data,{withCredentials:true});
       if(serverData.data.success){
+        console.log(serverData.data.token);
         toast.success("Login Success!");
+        setDegubData(serverData.data.token);
         // navigator("/");
         // Store.dispatch(LoadUser());
       }
@@ -47,8 +50,11 @@ export const Login = () => {
         <div>
         <Button className=' w-1/4 bg-primary-500 text-white my-4' onClick={handleLogin}>Login</Button>
 {
-  isAuthenticated === true ? (<p>true</p>) : (<p>false</p>)
+  isAuthenticated === true ? (<p>True</p>) : (<p>false</p>)
 }
+<p>
+  {DegubData}
+</p>
         </div>
         <p className='text-center my-auto'>
           

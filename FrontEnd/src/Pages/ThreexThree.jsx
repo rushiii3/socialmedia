@@ -1,18 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import axios from 'axios';
+import { server } from '../server';
+import { Button } from "@nextui-org/react";
 const ThreexThree = () => {
   const {post,loading} = useSelector((state) => state.post);
-  
+  const [Cookie, setCookie] = useState("");
   const [Data, setData] = useState([""]);
+  const getcookie = async() => {
+    try {
+      const serverData = await axios.post(`${server}/user/cookie`,{"db":"yes"},{withCredentials:true});
+      console.log(serverData.data.token);
+      setCookie(serverData.data.token);
+    } catch (error) {
+      console.log(error.response.data.message)
+    }
+  }
 
+  
   useEffect(() => {
     if (!loading && post) { // Check if post is defined
       console.log(post);
       setData(post)
     }
   }, [post, loading]);
-
-  console.log(Data);
   const [firstClick, setfirstClick] = useState([]);
   const [ColorArray, setColorArray] = useState([, , , , , , , ,]);
   function delay(millisec) {
@@ -80,6 +91,14 @@ const ThreexThree = () => {
       </p>)
     })
 }
+      </div>
+
+      <div>
+<Button onClick={getcookie}>
+  Click
+</Button>
+
+<p>{Cookie}</p>
       </div>
     </div>
   );

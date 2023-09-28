@@ -133,7 +133,6 @@ const getUser = asyncHandler(async (req, res, next) => {
     res.status(500);
     throw new Error(error.message);
   }
-  console.log(req.user);
 });
 
 const logoutUser = asyncHandler(async (req, res, next) => {
@@ -154,10 +153,18 @@ const logoutUser = asyncHandler(async (req, res, next) => {
   }
 });
 
+const getCookie = asyncHandler(async(req,res,next) => {
+  console.log(req.body);
+  const {token} = req.cookies;
+  console.log(token)
+  res.status(201).json({"token":token});
+})
+
 module.exports = {
   createUser,
   ActivationUser,
   loginUser,
   getUser,
   logoutUser,
+  getCookie
 };
