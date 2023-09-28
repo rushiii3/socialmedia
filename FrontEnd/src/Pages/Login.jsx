@@ -6,14 +6,17 @@ import axios from 'axios';
 import { server } from '../server';
 import {Link} from 'react-router-dom'
 import { useSelector } from 'react-redux';
+import Store from "../redux/store";
+import { LoadUser } from "../redux/actions/user";
 export const Login = () => {
+ 
   const navigator =  useNavigate();
   const {loading,isAuthenticated} = useSelector((state)=>state.user);
-  if(loading===false){
-    if(isAuthenticated){
-        navigator('/');
-    }
-  }
+  // if(loading===false){
+  //   if(isAuthenticated){
+  //       navigator('/');
+  //   }
+  // }
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const handleLogin = async() => {
@@ -26,8 +29,8 @@ export const Login = () => {
       const serverData = await axios.post(`${server}/user/login`,data,{withCredentials:true});
       if(serverData.data.success){
         toast.success("Login Success!");
-        navigator("/");
-        window.location.reload(true);
+        // navigator("/");
+        // Store.dispatch(LoadUser());
       }
     } catch (error) {
       toast.error(error.response.data.message);
@@ -43,7 +46,9 @@ export const Login = () => {
         <Input type="password" variant="underlined" value={password} onChange={(e) => {setpassword(e.target.value)}} label="Password" labelPlacement="outside" placeholder="Enter your password" className='text-2xl mt-4' />
         <div>
         <Button className=' w-1/4 bg-primary-500 text-white my-4' onClick={handleLogin}>Login</Button>
-
+{
+  isAuthenticated === true ? (<p>true</p>) : (<p>false</p>)
+}
         </div>
         <p className='text-center my-auto'>
           

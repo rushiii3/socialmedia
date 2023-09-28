@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 const ThreexThree = () => {
   const {post,loading} = useSelector((state) => state.post);
+  
   const [Data, setData] = useState([""]);
 
   useEffect(() => {
