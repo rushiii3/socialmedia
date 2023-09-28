@@ -30,6 +30,7 @@ export const Navbarr = () => {
       const {data} = await axios.get(`${server}/user/logout`,{withCredentials:true});
       console.log(data.message);
       toast.success(data.message);
+      localStorage.removeItem("token");
         navigator("/login");
         window.location.reload(true);
     } catch (error) {
