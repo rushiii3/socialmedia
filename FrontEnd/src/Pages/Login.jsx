@@ -30,7 +30,6 @@ export const Login = () => {
       if(serverData.data.success){
         console.log(serverData.data.token);
         toast.success("Login Success!");
-        setDegubData(serverData.data.token);
         localStorage.setItem('token', serverData.data.token);
         navigator("/");
         Store.dispatch(LoadUser());
