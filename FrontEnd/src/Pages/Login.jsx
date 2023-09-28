@@ -12,16 +12,14 @@ export const Login = () => {
  
   const navigator =  useNavigate();
   const {loading,isAuthenticated} = useSelector((state)=>state.user);
-  // if(loading===false){
-  //   if(isAuthenticated){
-  //       navigator('/');
-  //   }
-  // }
+  if(loading===false){
+    if(isAuthenticated){
+        navigator('/');
+    }
+  }
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-  const [DegubData, setDegubData] = useState("");
   const handleLogin = async() => {
-    
     const data = {
       "email":email,
       "password":password
@@ -34,8 +32,8 @@ export const Login = () => {
         toast.success("Login Success!");
         setDegubData(serverData.data.token);
         localStorage.setItem('token', serverData.data.token);
-        // navigator("/");
-        // Store.dispatch(LoadUser());
+        navigator("/");
+        Store.dispatch(LoadUser());
       }
     } catch (error) {
       toast.error(error.response.data.message);
@@ -51,12 +49,6 @@ export const Login = () => {
         <Input type="password" variant="underlined" value={password} onChange={(e) => {setpassword(e.target.value)}} label="Password" labelPlacement="outside" placeholder="Enter your password" className='text-2xl mt-4' />
         <div>
         <Button className=' w-1/4 bg-primary-500 text-white my-4' onClick={handleLogin}>Login</Button>
-{
-  isAuthenticated === true ? (<p>True</p>) : (<p>false</p>)
-}
-<p>
-  {DegubData}
-</p>
         </div>
         <p className='text-center my-auto'>
           

@@ -61,7 +61,7 @@ const AddPostPage = () => {
         setisloading(false);
         setimage(null);
         setcaption("");
-        navigator("/main");
+        navigator("/");
       })
       .catch((error) => {
         console.log(error);
