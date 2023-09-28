@@ -7,7 +7,7 @@ const { isAuthenticated } = require("../utlis/auth");
   router.post('/register',createUser);
   router.post('/activation',ActivationUser);
   router.post('/login',loginUser);
-  router.get('/getuser',isAuthenticated,getUser);
+  router.post('/getuser',isAuthenticated,getUser);
   router.get('/logout',logoutUser)
  router.post('/cookie',getCookie)
 

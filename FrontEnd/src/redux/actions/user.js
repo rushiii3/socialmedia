@@ -5,7 +5,10 @@ export const LoadUser = () => async(dispatch) => {
         dispatch({
             type:"LoadUserRequest",
         });
-        const {data} = await axios.get(`${server}/user/getuser`,{withCredentials:true});
+        const token = {
+            "token" :localStorage.getItem('token')
+        };
+        const {data} = await axios.post(`${server}/user/getuser`,token);
         dispatch({
             type:"LoadUserSuccess",
             payload: data,

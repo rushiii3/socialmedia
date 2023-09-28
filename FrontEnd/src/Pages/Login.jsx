@@ -21,17 +21,19 @@ export const Login = () => {
   const [password, setpassword] = useState("");
   const [DegubData, setDegubData] = useState("");
   const handleLogin = async() => {
-    console.log("yes");
+    
     const data = {
       "email":email,
       "password":password
     }
+    console.log("yes");
     try {
       const serverData = await axios.post(`${server}/user/login`,data,{withCredentials:true});
       if(serverData.data.success){
         console.log(serverData.data.token);
         toast.success("Login Success!");
         setDegubData(serverData.data.token);
+        localStorage.setItem('token', serverData.data.token);
         // navigator("/");
         // Store.dispatch(LoadUser());
       }
