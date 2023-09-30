@@ -1,9 +1,13 @@
 import React from 'react'
 import Edit from '../Components/Profile/Edit'
+import AnimatedPage from '../AnimatedPage'
 
 const EditProfile = () => {
   return (
-    <Edit />
+    <AnimatedPage>    
+      <Edit />
+      </AnimatedPage>
+
   )
 }
 

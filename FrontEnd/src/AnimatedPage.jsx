@@ -1,14 +1,18 @@
 import {motion} from 'framer-motion'
-const animation = {
-    initial : {opacity:0,x:100},
-    animate : {opacity:1,x:0},
-    exit : {opacity:0,x:-100},
-}
 const AnimatedPage = ({children}) => {
   return (
-    <motion.div variants={animation} initial="initial" animate="animate" exit="exit" transition={{duration:1}}>
-        {children}
-    </motion.div>
+    <motion.div
+    initial={{ x: 300, opacity: 0 }}
+    animate={{ x: 0, opacity: 1 }}
+    exit={{ x: 300, opacity: 0 }}
+    transition={{
+      type: "spring",
+      stiffness: 260,
+      damping: 20,
+    }}
+  >
+    {children}
+  </motion.div>
   )
 }
 

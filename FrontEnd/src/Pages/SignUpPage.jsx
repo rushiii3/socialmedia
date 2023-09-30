@@ -12,6 +12,7 @@ import {server} from '../server'
 import {Link} from 'react-router-dom';
 import CircularScrollIndicator from "./Circular";
 import { useSelector } from "react-redux";
+import AnimatedPage from "../AnimatedPage";
 export const SignUpPage = () => {
   const navigator =  useNavigate();
   const {loading,isAuthenticated} = useSelector((state)=>state.user);
@@ -68,7 +69,7 @@ export const SignUpPage = () => {
     }) 
   };
   return (
-    
+    <AnimatedPage>
     <div className="h-[100vh] flex items-center bg-slate-200">
       <CircularScrollIndicator />
       <div className="w-[90%]  md:w-[40%] rounded-xl bg-white  mx-auto p-5">
@@ -168,5 +169,6 @@ export const SignUpPage = () => {
         
       </div>
     </div>
+    </AnimatedPage>
   );
 };

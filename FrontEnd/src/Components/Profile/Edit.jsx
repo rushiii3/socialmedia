@@ -28,6 +28,7 @@ setisloading(true);
     setimage(null);
   }
   return (
+    
     <div className="flex flex-col w-full p-4 mx-auto md:h-[500px] h-auto  bg-white  md:max-w-md  md:flex-row md:max-w-10xl   dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
     <div className="flex flex-col w-[100%] p-4">
       <div className="flex items-center">
