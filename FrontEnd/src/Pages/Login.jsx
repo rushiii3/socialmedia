@@ -28,9 +28,13 @@ export const Login = () => {
     try {
       const serverData = await axios.post(`${server}/user/login`,data,{withCredentials:true});
       if(serverData.data.success){
-        console.log(serverData.data.token);
+        console.log();
+        const token = {
+          token: serverData.data.token,
+          expiration: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
+        };
         toast.success("Login Success!");
-        localStorage.setItem('token', serverData.data.token);
+        localStorage.setItem('token', JSON.stringify(token));
         navigator("/");
         Store.dispatch(LoadUser());
       }

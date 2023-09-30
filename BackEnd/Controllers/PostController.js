@@ -45,10 +45,10 @@ const createPost = asyncHandler(async (req, res, next) => {
     const post = await Post.create(postschmea);
     console.log("yee3");
     console.log(post);
-    // if (!post) {
-    //   res.status(500);
-    //   throw new Error("Failed to create the post");
-    // }
+    if (!post) {
+      res.status(500);
+      throw new Error("Failed to create the post");
+    }
     // const postId = "6506a4c4b65db5907c6ce679";
     // const userId = "6501fd3622a29bf5289c69c6";
     // const updatedPost = await Post.findOneAndUpdate(

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Navbar,
@@ -55,11 +55,22 @@ export const Navbarr = () => {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent justify="end">
+
+     
+
+
+      <NavbarContent justify="end" className="duration-1000 transition-all ">
         <>
         {
-          isAuthenticated === true ? (<Dropdown placement="bottom-start">
-          <DropdownTrigger>
+          isAuthenticated === true ? (
+
+
+
+
+
+            
+          <Dropdown placement="bottom-start">
+          <DropdownTrigger className="transition-all duration-1000">
             <User
               as="button"
               avatarProps={{
@@ -70,12 +81,20 @@ export const Navbarr = () => {
               name={user?.user?.username}
             />
           </DropdownTrigger>
+          
           <DropdownMenu aria-label="User Actions" variant="flat">
+
             <DropdownItem key="profile" className="h-14 gap-2">
               <p className="font-bold">Signed in as</p>
               <p className="font-bold">{user?.user?.email}</p>
             </DropdownItem>
-            <DropdownItem key="settings">My Settings</DropdownItem>
+            
+            <DropdownItem key="settings" onClick={() => {navigator(`/profile/${user?.user?._id}`);  window.location.reload(); }}>
+              My Profile
+
+              </DropdownItem>
+
+            
             {/* <DropdownItem key="team_settings">Team Settings</DropdownItem>
         <DropdownItem key="analytics">
           Analytics

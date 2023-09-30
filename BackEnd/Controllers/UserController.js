@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const sendMail = require("../utlis/sendMail");
 const sendToken = require("../utlis/sendToken");
 require("dotenv").config();
+const Post = require("../Models/PostModel");
 const createUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
   const UserName = await User.findOne({ username });
@@ -43,6 +44,7 @@ const createActivationToken = (user) => {
     expiresIn: "5m",
   });
 };
+
 const ActivationUser = asyncHandler(async (req, res, next) => {
   try {
     const { activation_token } = req.body;
@@ -160,11 +162,20 @@ const getCookie = asyncHandler(async(req,res,next) => {
   res.status(201).json({"token":token});
 })
 
+const getProfile = asyncHandler(async(req,res,next) => {
+  const {id} = req.params;
+  console.log(id);
+  const profileInfo = await Post.find({ user: id }).populate('user', 'username'); // Populate 'user' field and select only 'username'
+  console.log(profileInfo);
+  
+  res.status(201).json({"data":profileInfo});
+})
 module.exports = {
   createUser,
   ActivationUser,
   loginUser,
   getUser,
   logoutUser,
-  getCookie
+  getCookie,
+  getProfile
 };
