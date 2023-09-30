@@ -6,6 +6,7 @@ import {About} from './Pages/About';
 import ProfilePage from './Pages/ProfilePage';
 import AddPostPage from './Pages/AddPostPage';
 import ThreexThree from './Pages/ThreexThree';
+import EditProfile from './Pages/EditProfile'
 export {
     ErrorPage,
     Main,
@@ -14,5 +15,6 @@ export {
     About,
     ProfilePage,
     AddPostPage,
-    ThreexThree
+    ThreexThree,
+    EditProfile
 }

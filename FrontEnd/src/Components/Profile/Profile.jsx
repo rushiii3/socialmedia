@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Avatar, Button, Skeleton } from "@nextui-org/react";
 import { Card, CardBody, Image } from "@nextui-org/react";
@@ -17,7 +17,9 @@ import { FaXTwitter } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
 import {IoMdShareAlt} from 'react-icons/io'
 import {FiEdit} from 'react-icons/fi'
+import { server } from "../../server";
 const Profile = () => {
+  const navigator = useNavigate();
   const {loading,isAuthenticated,user} = useSelector((state)=>state.user);
   const iconClasses =
     "text-xl text-default-500 pointer-events-none flex-shrink-0 rotate-0";
@@ -35,7 +37,6 @@ const Profile = () => {
       }
     }
   }
-  console.log(UserAuth());
   const TimeOut = () =>{
     setTimeout(() => {
       setisLoading(true);
@@ -44,7 +45,7 @@ const Profile = () => {
   const getUserDetail = async () => {
     setisLoading(false);
     await axios
-      .get(`http://localhost:4000/api/v2/user/profile/${id}`)
+      .get(`${server}/user/profile/${id}`)
       .then((res) => {
         setUserData(res.data.data);
         TimeOut();
@@ -105,10 +106,14 @@ const Profile = () => {
           <div className="mt-4 text-center md:text-left my-1 flex justify-center">
             {
               UserAuth() ? (<Skeleton isLoaded={isLoading} className="rounded-lg mr-3">
-              <Button type="button" isDisabled={!isLoading} endContent={<FiEdit className="rotate-0" size={20}/>}>
-                Edit Profile
                 
+              <Button isDisabled={!isLoading} onClick={() => {navigator('/edit')}} endContent={<FiEdit className="rotate-0" size={20}/>}>
+              
+                Edit Profile
+               
               </Button>
+
+             
             </Skeleton>) : ''
             }
             

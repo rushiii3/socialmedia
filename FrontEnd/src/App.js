@@ -14,6 +14,7 @@ import {
   ProfilePage,
   AddPostPage,
   ThreexThree,
+  EditProfile
 } from "./Routes";
 import { Navbarr } from "./Components/Header/Navbar";
 import NavbarShow from "./Components/Header/NavbarShow";
@@ -65,6 +66,14 @@ function App() {
             element={
               <ProtectedUser>
                 <AddPostPage />
+              </ProtectedUser>
+            }
+          />
+          <Route
+            path="/edit"
+            element={
+              <ProtectedUser>
+                <EditProfile />
               </ProtectedUser>
             }
           />

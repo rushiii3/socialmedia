@@ -1,8 +1,9 @@
 import React from 'react'
 import { Fade } from "react-awesome-reveal";
+import AnimatedPage from '../AnimatedPage';
 export const About = () => {
   return (
-
+<AnimatedPage>
         <div className='flex flex-col md:flex-row '>
             <div className='p-5 static w-full'>
                 <Fade cascade damping={0.3}>
@@ -31,7 +32,7 @@ export const About = () => {
             
     </div>
     
-
+    </AnimatedPage>
 
   )
 }

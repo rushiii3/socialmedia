@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Avatar, Textarea, Button, Spinner,Input, Image } from "@nextui-org/react";
+import { Textarea, Button, Spinner,Input } from "@nextui-org/react";
 import { VscVerifiedFilled } from "react-icons/vsc";
 import axios from "axios";
 import { server } from "../server";
