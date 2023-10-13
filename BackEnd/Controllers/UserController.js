@@ -5,6 +5,16 @@ const sendMail = require("../utlis/sendMail");
 const sendToken = require("../utlis/sendToken");
 require("dotenv").config();
 const Post = require("../Models/PostModel");
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: "dmuhioahv",
+  api_key: "166273865775784",
+  api_secret: "blcMAs-77T_1t1VGnRIlLia_RqM",
+  secure: true,
+});
+
+
+
 const createUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
   const UserName = await User.findOne({ username });
@@ -122,7 +132,8 @@ const loginUser = asyncHandler(async (req, res, next) => {
 
 const getUser = asyncHandler(async (req, res, next) => {
   try {
-    const user = await User.findById(req.user);
+    
+    const user = await User.findById(req.user).select('username email url');
     if (!user) {
       res.status(400);
       throw new Error("User doesn't exists");
@@ -164,12 +175,46 @@ const getCookie = asyncHandler(async(req,res,next) => {
 
 const getProfile = asyncHandler(async(req,res,next) => {
   const {id} = req.params;
-  console.log(id);
   const profileInfo = await Post.find({ user: id }).populate('user', 'username'); // Populate 'user' field and select only 'username'
-  console.log(profileInfo);
-  
   res.status(201).json({"data":profileInfo});
 })
+
+const updateProfile = asyncHandler(async (req, res, next) => {
+  try {
+    const data = req.body;
+    console.log(data);
+    const user_id = data.user.user._id;
+    
+   const options = {
+    use_filename: true,
+    unique_filename: true,
+    overwrite: true,
+  };
+  // Upload the image
+  const result = await cloudinary.uploader.upload( data.image ).catch((error) => {
+    res.status(500);
+    throw new Error(error.message);
+  });
+  if (!result) {
+    res.status(500);
+    throw new Error("Failed to upload the image");
+  }
+  const avatar_update = {
+    username : data.Updateusername,
+    url:result.secure_url,
+ }
+
+    const updateProfile = await User.findByIdAndUpdate(user_id,avatar_update); 
+    console.log(updateProfile);
+    res.status(201).json({ "message": true});
+  } catch (error) {
+    console.log("buube");
+    res.status(500);
+    throw new Error(error.message);
+
+  }
+});
+
 module.exports = {
   createUser,
   ActivationUser,
@@ -177,5 +222,6 @@ module.exports = {
   getUser,
   logoutUser,
   getCookie,
-  getProfile
+  getProfile,
+  updateProfile
 };

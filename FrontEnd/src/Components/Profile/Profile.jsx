@@ -3,7 +3,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Avatar, Button, Skeleton } from "@nextui-org/react";
 import { Card, CardBody, Image } from "@nextui-org/react";
-import { VscVerifiedFilled } from "react-icons/vsc";
 import {
   Dropdown,
   DropdownTrigger,
@@ -21,6 +20,7 @@ import { server } from "../../server";
 const Profile = () => {
   const navigator = useNavigate();
   const {loading,isAuthenticated,user} = useSelector((state)=>state.user);
+  console.log(user);
   const iconClasses =
     "text-xl text-default-500 pointer-events-none flex-shrink-0 rotate-0";
   const [UserData, setUserData] = useState([""]);
@@ -66,8 +66,8 @@ const Profile = () => {
             className="rounded-full mx-auto md:mx-0 lg:w-40  lg:h-40 md:h-32 md:w-32 h-52 w-52"
           >
             <Avatar
-              src={UserData.user_avatar}
-              className="lg:w-40 rotate-90 lg:h-40 md:h-32 md:w-32 h-52 w-52 mr-20 mx-auto text-2xl"
+              src = {user?.user?.url == null ? ('https://www.cnet.com/a/img/resize/e9afc7426679411d3c456864140ef4e2d2587bd8/hub/2023/07/05/b8503974-3baa-4311-bfa1-5e5b747c83ad/jujutsu-kaisen-season-2.jpg?auto=webp&fit=crop&height=360&width=640'):(user?.user?.url)}
+              className=" lg:w-40 rotate-0 lg:h-40 md:h-32 md:w-32 h-52 w-52 mr-20 mx-auto text-2xl"
             />
           </Skeleton>
         </div>

@@ -68,7 +68,10 @@ const createPost = asyncHandler(async (req, res, next) => {
 });
 const getPost = asyncHandler(async (req, res, next) => {
   const posts = await Post.find({})
-    .populate("user", "username")
+  .populate({
+    path: "user",
+    select: "username url", // Only select the username field from the user data
+  })
     .sort({ createdAt: -1 });
   res.json(posts);
 });

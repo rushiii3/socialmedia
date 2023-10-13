@@ -12,8 +12,6 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import AnimatedPage from "../../AnimatedPage";
 const AddPost = () => {
-
-  
   const { user } = useSelector((state) => state.user);
   const navigator =  useNavigate();
   const schema = yup.object().shape({
@@ -39,7 +37,6 @@ const AddPost = () => {
         setimage(reader.result);
       }
     };
-    console.log(image);
     reader.readAsDataURL(event.target.files[0]);
   };
   const handlesubmit = async (e) => {

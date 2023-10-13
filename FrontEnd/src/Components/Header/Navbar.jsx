@@ -75,7 +75,7 @@ export const Navbarr = () => {
               as="button"
               avatarProps={{
                 isBordered: false,
-                src: "https://img.freepik.com/premium-vector/anime-cartoon-character-vector-illustration_648489-34.jpg",
+                src: `${user?.user?.url == null ? ('https://www.cnet.com/a/img/resize/e9afc7426679411d3c456864140ef4e2d2587bd8/hub/2023/07/05/b8503974-3baa-4311-bfa1-5e5b747c83ad/jujutsu-kaisen-season-2.jpg?auto=webp&fit=crop&height=360&width=640'):(user?.user?.url)}`,
               }}
               className="transition-transform"
               name={user?.user?.username}
