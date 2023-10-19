@@ -3,7 +3,26 @@ import { useSelector } from "react-redux";
 import axios from 'axios';
 import { server } from '../server';
 import { Button } from "@nextui-org/react";
+import { Player, BigPlayButton } from 'video-react';
 const ThreexThree = () => {
+  const url = "https://api.consumet.org/anime/gogoanime/watch/spy-x-family-episode-1";
+  const [Video, setVideo] = useState("");
+  const data = async () => {
+      try {
+          const { data } = await axios.get(url, { params: { server: "gogocdn" } });
+          
+          setVideo(data.sources[3].url);
+          return data;
+      } catch (err) {
+          throw new Error(err.message);
+      }
+  };
+  data();
+  console.log(Video);
+   
+ 
+ 
+
   const {post,loading} = useSelector((state) => state.post);
   const [Cookie, setCookie] = useState("");
   const [Data, setData] = useState([""]);
@@ -98,7 +117,17 @@ const ThreexThree = () => {
   Click
 </Button>
 
-<p>{Cookie}</p>
+
+{Video == null ? ("empty"):(
+
+<Player src={Video}>
+      <BigPlayButton position="center" />
+    </Player>
+)}
+
+
+
+<p>{Video}</p>
       </div>
     </div>
   );

@@ -17,6 +17,7 @@ const Post = ({ values,isLoading }) => {
             
             <Skeleton isLoaded={isLoading} className="rounded-full">
               <img
+              loading="lazy"
                 className="h-8 w-8 rounded-full"
                 src = {values?.user?.url == null ? ('https://www.cnet.com/a/img/resize/e9afc7426679411d3c456864140ef4e2d2587bd8/hub/2023/07/05/b8503974-3baa-4311-bfa1-5e5b747c83ad/jujutsu-kaisen-season-2.jpg?auto=webp&fit=crop&height=360&width=640'):(values?.user?.url)}
 
@@ -34,7 +35,7 @@ const Post = ({ values,isLoading }) => {
             </div>
             {values?.imageUrl?.url ? (
               <Skeleton isLoaded={isLoading} className="w-full">
-              <img src={values.imageUrl.url} alt="Image" />
+              <img src={values.imageUrl.url} className="h-96 w-full object-contain" loading="lazy" alt="Image" />
               </Skeleton>
             ) : (
               <span>No Image Available</span>
