@@ -181,34 +181,25 @@ const getProfile = asyncHandler(async(req,res,next) => {
 
 const updateProfile = asyncHandler(async (req, res, next) => {
   try {
+    console.log("write");
     const data = req.body;
-    console.log(data);
     const user_id = data.user.user._id;
-    
-   const options = {
-    use_filename: true,
-    unique_filename: true,
-    overwrite: true,
-  };
-  // Upload the image
-  const result = await cloudinary.uploader.upload( data.image ).catch((error) => {
-    res.status(500);
-    throw new Error(error.message);
-  });
-  if (!result) {
-    res.status(500);
-    throw new Error("Failed to upload the image");
+    const avatar_update = {
+      username : data.Updateusername,
+      url:data.image,
   }
-  const avatar_update = {
-    username : data.Updateusername,
-    url:result.secure_url,
- }
 
     const updateProfile = await User.findByIdAndUpdate(user_id,avatar_update); 
-    console.log(updateProfile);
+    if(!updateProfile){
+    res.status(500);
+    throw new Error("Not updated some error errored");
+    }
+
     res.status(201).json({ "message": true});
+
+
   } catch (error) {
-    console.log("buube");
+    console.log(error.message);
     res.status(500);
     throw new Error(error.message);
 

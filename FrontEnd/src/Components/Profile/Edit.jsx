@@ -39,19 +39,12 @@ const Edit = () => {
   const handlesubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-  //    // Size of the original image in KB
-    
-  // // Log the sizes
-  
-  // console.log("Compressed Size:", compressedSizeKB, "KB");
     try {
-
-      // Send the compressed image to the server
       const serverResponse = await axios.post(`${server}/user/edit`, {image,Updateusername,user},{
         headers: {
           "Content-Type": "multipart/form-data",
         },
-        withCredentials: true, // Add this line to enable cookies and credentials
+        withCredentials: true, 
       });
 
       if (serverResponse.data.message) {
@@ -62,6 +55,7 @@ const Edit = () => {
       }
     } catch (error) {
       console.error("Server request error:", error);
+      toast.error(error.message);
       setIsLoading(false);
     }
   };
