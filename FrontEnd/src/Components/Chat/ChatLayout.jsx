@@ -25,7 +25,7 @@ const ChatLayout = () => {
   };
   useEffect(() => {
     getChatUser();
-    const newSocket = io("http://localhost:4000");
+    const newSocket = io(server);
     setSocket(newSocket);
     return () => {
       newSocket.disconnect();
