@@ -64,11 +64,6 @@ export const Navbarr = () => {
         {
           isAuthenticated === true ? (
 
-
-
-
-
-            
           <Dropdown placement="bottom-start">
           <DropdownTrigger className="transition-all duration-1000">
             <User
@@ -89,7 +84,7 @@ export const Navbarr = () => {
               <p className="font-bold">{user?.user?.email}</p>
             </DropdownItem>
             
-            <DropdownItem key="settings" onClick={() => {navigator(`/profile/${user?.user?._id}`);  window.location.reload(); }}>
+            <DropdownItem key="settings" onClick={() => {navigator(`/profile/${user?.user?.username}`);  window.location.reload(); }}>
               My Profile
 
               </DropdownItem>
