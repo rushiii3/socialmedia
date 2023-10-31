@@ -98,33 +98,41 @@ const ActivationUser = asyncHandler(async (req, res, next) => {
     }
     res.status(201).json({ message: "Registered Successful" });
   } catch (error) {
-    console.error(error);
     return res.status(500).json({ error: "Token verification failed" });
   }
 });
 const loginUser = asyncHandler(async (req, res, next) => {
   try {
+    console.log("1");
     const { email, password } = req.body;
+    console.log("2");
     if (!email || !password) {
+      console.log("3");
       res.status(404);
       throw new Error("Email or password should not be empty");
     }
+    console.log("4");
     const user = await User.findOne({ email }).select("+password");
+    console.log("5");
     if (!user) {
+      console.log("6");
       res.status(404);
       throw new Error("User doesn't exist! ");
     }
+    console.log("7");
     const isPasswordValid = await user.comparePassword(password);
-
+    console.log("8");
     if (!isPasswordValid) {
+      console.log("9");
       res.status(400);
       throw new Error("Please provide the correct information");
     }
-    console.log(JSON.stringify(user));
+    console.log("10");
     const UserToken = jwt.sign(JSON.stringify(user), process.env.JWT_SECRET);
+    console.log("11");
     sendToken(UserToken, 201, res);
+    console.log("12");
   } catch (error) {
-    console.log(error);
     res.status(500);
     throw new Error(error.message);
   }
@@ -167,26 +175,62 @@ const logoutUser = asyncHandler(async (req, res, next) => {
 });
 
 const getCookie = asyncHandler(async(req,res,next) => {
-  console.log(req.body);
   const {token} = req.cookies;
-  console.log(token)
   res.status(201).json({"token":token});
 })
 
 const getProfile = asyncHandler(async(req,res,next) => {
   const {id} = req.params;
-  const profileInfo = await Post.find({ user: id }).populate('user', 'username'); // Populate 'user' field and select only 'username'
+  console.log("yesss");
+  try {
+    const user = await User.findOne({username:id});
+    if(!user){
+      res.status(404);
+      throw new Error("No user found!");
+    }
+    const profileInfo = await Post.find({ user: user.id }).populate('user', 'username');// Populate 'user' field and select only 'username'
+    if(!profileInfo){
+      res.status(404);
+      throw new Error("No user found!");
+    }
+  if (profileInfo.length===0){
+    console.log("yes");
+    res.status(404);
+    throw new Error("No user found!");
+  }
   res.status(201).json({"data":profileInfo});
+  } catch (error) {
+      res.status(500);
+      throw new Error(error.message);
+  }
+  
+  
 })
 
 const updateProfile = asyncHandler(async (req, res, next) => {
   try {
-    console.log("write");
     const data = req.body;
     const user_id = data.user.user._id;
+    const options = {
+      use_filename: true,
+      unique_filename: true,
+      overwrite: true,
+    };
+    const image = data.image
+    // Upload the image
+    const result = await cloudinary.uploader.upload(image,{ width: 100, crop: "scale", fetch_format: "auto" }).catch((error) => {
+      res.status(500);
+      throw new Error(error.message);
+    });
+    if (!result) {
+      res.status(500);
+      throw new Error("Failed to upload the image");
+    }
+
+
     const avatar_update = {
       username : data.Updateusername,
-      url:data.image,
+      url:result.secure_url,
   }
 
     const updateProfile = await User.findByIdAndUpdate(user_id,avatar_update); 
@@ -197,9 +241,8 @@ const updateProfile = asyncHandler(async (req, res, next) => {
 
     res.status(201).json({ "message": true});
 
-
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     res.status(500);
     throw new Error(error.message);
 

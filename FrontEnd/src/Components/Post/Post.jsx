@@ -26,7 +26,7 @@ const Post = ({ values,isLoading }) => {
               <div className="ml-3 ">
               <Skeleton isLoaded={isLoading} className="rounded-lg w-full">
                 <span className="text-sm font-semibold antialiased block leading-tight">
-                  <Link to={isLoading ? `/profile/${values?.user?._id}` : ''}>
+                  <Link to={isLoading ? `/profile/${values?.user?.username}` : ''}>
                     {values?.user?.username}
                   </Link>
                 </span>

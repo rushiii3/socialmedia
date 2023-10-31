@@ -11,7 +11,8 @@ import {
     ProfilePage,
     AddPostPage,
     ThreexThree,
-    EditProfile
+    EditProfile,
+    ChatPage
   } from "./Routes";
   import {
     Routes,
@@ -55,6 +56,16 @@ const AnimatedRoutes = () => {
     />
     <Route path="/3x3" element={<ThreexThree />} />
     <Route path="/3d" element={<ThreeD />} />
+    <Route path="/chat" element={
+    
+
+    <ProtectedUser>
+    <ChatPage />
+        </ProtectedUser>
+
+    
+    
+    } />
   </Routes>
   </AnimatePresence>
   )

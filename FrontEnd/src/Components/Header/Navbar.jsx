@@ -140,6 +140,15 @@ export const Navbarr = () => {
             <Link to="/">Home</Link>
           </Button>
         </NavbarItem>
+        <NavbarItem>
+          <Button
+            className="w-full cursor-pointer text-black bg-white"
+            size="lg"
+          >
+            <Link to="/chat">Chat</Link>
+          </Button>
+        </NavbarItem>
+        
         {
           isAuthenticated===true ? (
             <NavbarItem>

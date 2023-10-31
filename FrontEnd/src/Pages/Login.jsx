@@ -15,21 +15,22 @@ export const Login = () => {
   const {loading,isAuthenticated} = useSelector((state)=>state.user);
   if(loading===false){
     if(isAuthenticated){
-        navigator('/');
+        // navigator('/');
     }
   }
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const handleLogin = async() => {
+    console.log("yes");
     const data = {
       "email":email,
       "password":password
     }
-    console.log("yes");
+    console.log("byee");
     try {
       const serverData = await axios.post(`${server}/user/login`,data,{withCredentials:true});
+      console.log(serverData);
       if(serverData.data.success){
-        console.log();
         const token = {
           token: serverData.data.token,
           expiration: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
@@ -40,6 +41,7 @@ export const Login = () => {
         Store.dispatch(LoadUser());
       }
     } catch (error) {
+      console.log(error.message);
       toast.error(error.response.data.message);
     }
   }

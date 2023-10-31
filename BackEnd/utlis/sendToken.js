@@ -6,6 +6,7 @@ const sendToken = (user,stauscode,res) => {
         sameSite: "none",
         secure: true,
       };
+
       res.status(stauscode).cookie("token", token, options).json({
         success: true,
         user,

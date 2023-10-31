@@ -11,15 +11,16 @@ cloudinary.config({
 const createPost = asyncHandler(async (req, res, next) => {
   try {
     const { caption, image, user } = req.body;
-
-    console.log(user.user._id);
     const options = {
       use_filename: true,
       unique_filename: true,
       overwrite: true,
     };
     // Upload the image
-    const result = await cloudinary.uploader.upload(image).catch((error) => {
+    const result = await cloudinary.uploader.upload(image,{transformation: [
+      {width: 500, crop: "scale"},
+      {fetch_format: "auto"}
+      ]}).catch((error) => {
       res.status(500);
       throw new Error(error.message);
     });
