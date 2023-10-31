@@ -40,7 +40,7 @@ app.use('/t', (req,res) => {
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: 'http://localhost:3000'
+    origin: 'https://socialmedia-gilt.vercel.app/'
   }
 });
 
