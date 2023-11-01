@@ -25,7 +25,7 @@ const ChatLayout = () => {
   };
   useEffect(() => {
     getChatUser();
-    const newSocket = io(server);
+    const newSocket = io('https://socialmedia-1eyo.vercel.app');
     setSocket(newSocket);
     return () => {
       newSocket.disconnect();
