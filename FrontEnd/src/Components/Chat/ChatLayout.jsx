@@ -19,14 +19,13 @@ const ChatLayout = () => {
         `${server}/chat/getChat/${user?.user?._id}`
       );
       setDisplayUsers(data);
-      console.log(data);
-      console.log(DisplayUsers);
     } catch (error) {}
   };
   useEffect(() => {
     getChatUser();
-    const newSocket = io('https://socialmedia-1eyo.vercel.app');
+    const newSocket = io('http://localhost:3500');
     setSocket(newSocket);
+    console.log(newSocket);
     return () => {
       newSocket.disconnect();
     };
