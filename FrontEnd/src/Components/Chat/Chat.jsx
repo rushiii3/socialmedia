@@ -59,9 +59,9 @@ const Chat = (props) => {
       const sendmessage = await axios.post(`${server}/chat/send`,messageList);
       // Use the functional update to access the latest state
       setMessages((prev) => [...prev, messageList]);
-
-      setMessage("");
       scrollToBottom()
+      setMessage("");
+      
     }
   };
   useEffect(() => {
@@ -98,80 +98,109 @@ const Chat = (props) => {
 
 
   return (
-    <div class="flex h-screen overflow-hidden relative">
-      <div class="flex-1">
-        <header class="bg-white p-4 text-gray-700 border flex justify-between">
-          <div class="flex ">
-            <div class="w-9 h-9 rounded-full flex items-center justify-center mr-2">
-              <img
+    <div className="">
+    <div class="flex-1 p-3 sm:p-6 justify-between flex flex-col h-[40rem]">
+      <div class="flex sm:items-center justify-between pb-3 border-b-2 border-gray-200" key={props?.userName}>
+        <div class="relative flex items-center space-x-4">
+          <div class="relative">
+          <img
                 src={user?.user?.url === null ? (user?.user?.url) : ('https://media.tenor.com/HQx-ClEH6lYAAAAd/anime-demon-slayer.gif')}
                 alt={user?.user?.username}
                 class="w-8 h-8 rounded-full object-cover"
               />
-            </div>
-            <h1 class="text-2xl font-semibold">{props?.userName}</h1>
           </div>
-          <div>
-            <button type="button" onClick={props?.removeChat}>
+          <div class="flex flex-col leading-tight">
+            <div class="text-xl mt-1 flex items-center">
+              <span class="text-gray-700 mr-3">{props?.userName}</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2">
+        <button type="button" onClick={props?.removeChat}>
               <IoArrowBackOutline className="rotate-0" size={30} />
             </button>
-          </div>
-        </header>
-
-        <div class="h-[75%] overflow-y-auto p-4 pb-20 absolute w-full right-0 bottom-23" ref={chatContainerRef}>
-          {messages.map((msg, index) => (
+        </div>
+      </div>
+      <div
+        id="messages"
+        class="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-1 scrolling-touch"
+        ref={chatContainerRef}
+      >
+{messages.map((msg, index) => (
             <>
               {msg.sender === username ? (
-                <div class="flex justify-end mb-4" key={index}>
-                  <div class="flex max-w-96 bg-gray-300  text-black rounded-lg p-3 gap-3">
-                    <p>{msg.message}</p>
+                <div class="chat-message" key={index}>
+                <div class="flex items-end justify-end">
+                  <div class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
+                    <div>
+                      <span class="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white text-sm">
+                      {msg.message}
+                      </span>
+                    </div>
                   </div>
-                  <div class="w-9 h-9 rounded-full flex items-center justify-center ml-2">
-                    <img
-                      src={props?.userProfile === null ? (props?.userProfile ) : ('https://66.media.tumblr.com/4f9e85d9bf78ceaaf2f44de3e90e735a/03a6876b96c16cda-b0/s540x810/0f93acc54f06ba7268a4b031cc5d6f90381a08a5.gif')}
-                      alt={props?.userName}
-                      class="w-8 h-8 rounded-full object-cover"
-                    />
-                  </div>
+                  <img
+                    src={props?.userProfile === null ? (props?.userProfile ) : ('https://66.media.tumblr.com/4f9e85d9bf78ceaaf2f44de3e90e735a/03a6876b96c16cda-b0/s540x810/0f93acc54f06ba7268a4b031cc5d6f90381a08a5.gif')}
+                    alt={props?.userName}
+                    class="w-8 h-8 object-cover rounded-full order-2"
+                  />
                 </div>
+              </div>
+                
               ) : (
-                <div class="flex mb-4 " key={index}>
-                  <div class="w-9 h-9 rounded-full flex items-center justify-center mr-2">
-                    <img
-                      src={props?.userProfile === null ? (props?.userProfile ) : ('https://media.tenor.com/HQx-ClEH6lYAAAAd/anime-demon-slayer.gif')}
-                      alt={props?.userName}
-                      class="w-8 h-8 rounded-full object-cover"
-                    />
-                  </div>
-                  <div class="flex max-w-96  bg-indigo-500 rounded-lg p-3 gap-3">
-                    <p class="text-white">{msg.message}</p>
-                  </div>
-                </div>
+               
+                  <div class="chat-message" key={index}>
+          <div class="flex items-end">
+            <div class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
+              <div>
+                <span class="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600 text-sm">
+                {msg.message}
+                </span>
+              </div>
+            </div>
+            <img
+              src={props?.userProfile === null ? (props?.userProfile ) : ('https://media.tenor.com/HQx-ClEH6lYAAAAd/anime-demon-slayer.gif')}
+              alt={props?.userName}
+              class="w-8 h-8 rounded-full order-1 object-cover"
+            />
+          </div>
+        </div>
+                  
+                
               )}
             </>
           ))}
-        </div>
 
-        <footer class="bg-white border-t border-gray-300 p-4 absolute bottom-16 right-0  w-full">
-          <div class="flex items-center">
-            <input
-              type="text"
-              placeholder="Type a message..."
-              class="w-full p-2 rounded-md border border-gray-400 focus:outline-none focus:border-blue-500"
-              onChange={(e) => setMessage(e.target.value)}
+
+        
+        
+        
+      </div>
+      <div class="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0 flex">
+        <input
+          type="text"
+          placeholder="Message"
+          class="block w-full py-3 px-4 mx-3 bg-gray-100 rounded-full outline-none focus:text-gray-700"
+          name="message"
+          onChange={(e) => setMessage(e.target.value)}
               value={message}
-            />
-            <button
-              class="bg-indigo-500 text-white px-4 py-2 rounded-md ml-2"
-              type="submit"
-              onClick={handleSendMessage}
-            >
-              Send
-            </button>
-          </div>
-        </footer>
+          required
+        />
+
+        <button type="submit" onClick={handleSendMessage}>
+          <svg
+            class="w-5 h-5 text-gray-500 origin-center transform rotate-90"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+
+          >
+            <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+          </svg>
+        </button>
       </div>
     </div>
+  </div>
+
   );
 };
 
