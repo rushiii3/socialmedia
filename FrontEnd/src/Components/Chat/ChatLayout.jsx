@@ -23,7 +23,7 @@ const ChatLayout = () => {
   };
   useEffect(() => {
     getChatUser();
-    const newSocket = io('http://localhost:3500');
+    const newSocket = io('https://socketio-socialmedia.onrender.com');
     setSocket(newSocket);
     console.log(newSocket);
     return () => {
