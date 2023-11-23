@@ -188,7 +188,7 @@ const getProfile = asyncHandler(async(req,res,next) => {
       res.status(404);
       throw new Error("No user found!");
     }
-    const profileInfo = await Post.find({ user: user.id }).populate('user', 'username');// Populate 'user' field and select only 'username'
+    const profileInfo = await Post.find({ user: user.id }).populate('user', 'username', 'url');// Populate 'user' field and select only 'username'
     if(!profileInfo){
       res.status(404);
       throw new Error("No user found!");
