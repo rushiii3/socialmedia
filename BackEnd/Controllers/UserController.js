@@ -6,15 +6,6 @@ const sendToken = require("../utlis/sendToken");
 require("dotenv").config();
 const Post = require("../Models/PostModel");
 const cloudinary = require("cloudinary").v2;
-cloudinary.config({
-  cloud_name: "dmuhioahv",
-  api_key: "166273865775784",
-  api_secret: "blcMAs-77T_1t1VGnRIlLia_RqM",
-  secure: true,
-});
-
-
-
 const createUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
   const UserName = await User.findOne({ username });
